@@ -3,20 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - SUBTLE AURA</title>
+    <title>EMPIRE CHAIN - PROFIL AURA</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-        /* --- Global Reset & Body (Très Sombre, Texture Subtile) --- */
-        body {
+        /* --- Base HTML/Body pour la Stabilité WebView --- */
+        html, body {
+            height: 100%; /* Important pour la stabilité sur les WebViews */
             margin: 0;
             padding: 0;
+            overflow: hidden; /* Garder pour empêcher le défilement du fond */
+            overscroll-behavior: none; /* Empêche le rebond sur mobile */
+        }
+
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
             background-color: #0b0b14; /* Fond Bleu Nuit Très Sombre */
             background-image: 
                 linear-gradient(rgba(0,0,0,0.2) 1px, transparent 1px),
@@ -24,33 +29,33 @@
             background-size: 20px 20px;
             font-family: 'Inter', sans-serif;
             color: white;
-            /* overflow: hidden; RETIRE POUR STABILITE */
             position: relative;
+            touch-action: manipulation; /* Optimisation des événements tactiles */
         }
 
         /* --- Dynamic Orb Background (Discret et Flou) --- */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px); 
-            opacity: 0.4; 
-            animation: orbMove 30s infinite alternate ease-in-out;
+            filter: blur(70px); /* Flou légèrement réduit pour la perf */
+            opacity: 0.3; /* Très faible opacité */
+            animation: orbMove 35s infinite alternate ease-in-out; /* Plus lent */
             z-index: -1;
-            transition: background-color 10s ease-in-out;
+            will-change: transform, filter, opacity; /* Optimisation des animations */
         }
-        .orb.blue { background-color: #4a00e0; width: 300px; height: 300px; top: 15%; left: 10%; animation-delay: 0s; }
-        .orb.purple { background-color: #8e2de2; width: 350px; height: 350px; bottom: 20%; right: 15%; animation-delay: 10s; }
-        .orb.magenta { background-color: #fc466b; width: 250px; height: 250px; top: 40%; right: 5%; animation-delay: 20s; }
+        .orb.blue { background-color: #4a00e0; width: 220px; height: 220px; top: 18%; left: 12%; animation-delay: 0s; } /* Taille réduite */
+        .orb.purple { background-color: #8e2de2; width: 280px; height: 280px; bottom: 22%; right: 18%; animation-delay: 10s; } /* Taille réduite */
+        .orb.magenta { background-color: #fc466b; width: 180px; height: 180px; top: 42%; right: 8%; animation-delay: 20s; } /* Taille réduite */
         
         @keyframes orbMove {
             0% { transform: translate(0, 0) scale(1); background-color: #4a00e0; }
-            33% { transform: translate(10vw, -5vh) scale(1.05); background-color: #8e2de2; }
-            66% { transform: translate(-5vw, 10vh) scale(0.95); background-color: #fc466b; }
+            33% { transform: translate(10vw, -5vh) scale(1.03); background-color: #8e2de2; }
+            66% { transform: translate(-5vw, 10vh) scale(0.97); background-color: #fc466b; }
             100% { transform: translate(0, 0) scale(1); background-color: #4a00e0; }
         }
 
-        /* --- LOGIN CARD (SUBTLE GLASSMORPHISM) --- */
-        .login-card {
+        /* --- PROFIL CARD (SUBTLE GLASSMORPHISM) --- */
+        .profile-card { /* Renommé pour "profil" */
             position: relative;
             width: 90%;
             max-width: 340px; 
@@ -65,10 +70,11 @@
             opacity: 0;
             animation: fadeIn 1s ease-out forwards;
             z-index: 10; 
+            will-change: transform, opacity; /* Optimisation pour la carte */
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Avatar Icon (Centré, avec un léger glow) --- */
+        /* --- Avatar Icon (Centré, avec un léger glow lent) --- */
         .avatar-icon {
             font-size: 70px;
             color: #b0dfff; 
@@ -85,7 +91,7 @@
         h2 {
             font-size: 24px;
             font-weight: 600;
-            color: #e0f2fe;
+            color: #e0f2fe; 
             margin-bottom: 25px;
             letter-spacing: 0.5px;
         }
@@ -95,7 +101,7 @@
             position: relative;
             margin-bottom: 20px;
         }
-        .input-group i {
+        .input-group i { /* Pour l'icône dans le premier champ */
             position: absolute;
             left: 15px;
             top: 50%;
@@ -105,54 +111,54 @@
         }
         .input-field {
             width: calc(100% - 30px);
-            padding: 12px 15px; /* Padding neutre par défaut */
+            padding: 12px 15px; 
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.05); 
             color: #e0f2fe;
             font-size: 15px;
             font-family: 'Inter', sans-serif;
             outline: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        /* Ajustement du padding pour les champs AVEC icône */
+        /* Ajustement du padding pour les champs AVEC icône (seulement le premier) */
         .input-group:has(i) .input-field {
             padding-left: 45px;
         }
-
         .input-field::placeholder {
             color: #a0aec0;
         }
         .input-field:focus {
             border-color: #6a11cb;
-            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.3);
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.3); 
         }
 
-        /* --- "Créer un compte" Button (Glow Lent) --- */
-        .btn-create {
+        /* --- Bouton d'action (Glow Lent) --- */
+        .btn-action { /* Renommé pour être plus générique */
             width: 100%;
             padding: 15px;
             border-radius: 8px;
             border: none;
-            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); 
             color: white;
             font-weight: 600;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.5s ease;
-            box-shadow: 0 8px 25px rgba(106, 17, 203, 0.2);
-            animation: buttonGlow 8s infinite alternate ease-in-out;
+            box-shadow: 0 8px 25px rgba(106, 17, 203, 0.2); 
+            animation: buttonGlow 8s infinite alternate ease-in-out; 
+            -webkit-tap-highlight-color: transparent; /* Supprime le flash bleu au toucher sur iOS */
         }
-        .btn-create:hover {
+        .btn-action:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(106, 17, 203, 0.4);
+            box-shadow: 0 12px 30px rgba(106, 17, 203, 0.4); 
         }
         @keyframes buttonGlow {
             from { box-shadow: 0 8px 25px rgba(106, 17, 203, 0.2); }
-            to { box-shadow: 0 8px 25px rgba(37, 117, 252, 0.3); }
+            to { box-shadow: 0 8px 25px rgba(37, 117, 252, 0.3); } 
         }
 
-        /* --- Status Message (pour Telegram auto-login) --- */
+        /* --- Status Message --- */
         #status-message {
             margin-top: 20px;
             font-size: 13px;
@@ -167,8 +173,7 @@
     <div class="orb purple"></div>
     <div class="orb magenta"></div>
 
-    <div class="login-card">
-        <div class="avatar-icon">
+    <div class="profile-card"> <div class="avatar-icon">
             <i class="fas fa-user-circle"></i>
         </div>
         <h2>Profil</h2>
@@ -182,21 +187,24 @@
             <input type="password" class="input-field" placeholder="Mot de passe" value="***********" disabled>
         </div>
 
-        <button class="btn-create" id="loginBtn">Créer un compte</button>
-        
-        <div id="status-message">Vérification de la session Telegram...</div>
+        <button class="btn-action" id="mainActionButton">ACCÉDER AU JEU</button> <div id="status-message">Vérification de la session Telegram...</div>
     </div>
 
     <script>
         const statusMsg = document.getElementById('status-message');
-        const loginBtn = document.getElementById('loginBtn');
+        const mainActionButton = document.getElementById('mainActionButton');
         const idInputField = document.querySelector('.input-group:first-of-type .input-field');
         let telegramUsername = 'UNKNOWN_USER'; 
 
+        // Fonction pour initialiser la WebApp Telegram
         function initializeTelegram() {
+            // Afficher un message initial de chargement
+            statusMsg.innerText = "Initialisation de Telegram...";
+            mainActionButton.disabled = true; // Désactiver le bouton pendant le chargement
+
             setTimeout(() => {
                 statusMsg.innerText = "Synchronisation des données utilisateur...";
-            }, 500);
+            }, 800);
 
             setTimeout(() => {
                 try {
@@ -209,24 +217,36 @@
                         } else if (user && user.id) {
                              telegramUsername = `USER_ID-${user.id}`;
                         }
+                        // Forcer la hauteur à 100% via l'API Telegram
+                        window.Telegram.WebApp.expand();
+
+                    } else {
+                        // Fallback si pas en WebApp Telegram
+                        telegramUsername = "@DEMO_USER_LOCAL"; 
+                        statusMsg.innerText = "Mode démo (pas en WebApp Telegram).";
                     }
                 } catch (e) {
-                    telegramUsername = "@DEMO_USER_123";
+                    console.error("Erreur lors de l'initialisation de Telegram WebApp:", e);
+                    telegramUsername = "@DEMO_USER_ERROR"; 
+                    statusMsg.innerText = "Erreur Telegram. Mode démo.";
                 }
                 
-                statusMsg.innerText = `Session ${telegramUsername} détectée. Prêt.`;
-                idInputField.value = telegramUsername; // Affiche l'ID détecté
-                loginBtn.innerText = "ACCÉDER AU JEU";
-                loginBtn.disabled = false;
-            }, 2000);
+                // Mettre à jour l'UI après l'initialisation
+                idInputField.value = telegramUsername; 
+                statusMsg.innerText = `Session ${telegramUsername} détectée. Prêt à jouer.`;
+                mainActionButton.innerText = "ACCÉDER AU JEU";
+                mainActionButton.disabled = false; // Activer le bouton
+            }, 2500); // Délai un peu plus long pour l'initialisation
         }
 
-        loginBtn.addEventListener('click', async () => {
-            loginBtn.innerText = "ACCÈS EN COURS...";
-            loginBtn.disabled = true;
+        // Gestionnaire d'événements pour le bouton d'action
+        mainActionButton.addEventListener('click', async () => {
+            mainActionButton.innerText = "ACCÈS EN COURS...";
+            mainActionButton.disabled = true;
             statusMsg.innerText = "Chargement des actifs de l'Empire...";
 
             try {
+                // Simulation d'un appel API
                 const response = await fetch('/api/save_wealth', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -240,18 +260,23 @@
                 if (response.ok) {
                     statusMsg.innerText = "Bienvenue dans l'Empire Chain !";
                     statusMsg.style.color = "#4CAF50"; 
+                    // Ici, vous redirigeriez l'utilisateur vers la page de jeu réelle
+                    // Par exemple: window.location.href = '/game-page.html';
                 } else {
                     throw new Error("Erreur Serveur: " + response.statusText);
                 }
             } catch (error) {
+                console.error("Erreur lors de la synchronisation des actifs:", error);
                 statusMsg.innerText = "Échec de l'accès. Réessayez plus tard.";
                 statusMsg.style.color = "#FF5733";
             } finally {
-                loginBtn.innerText = "ACCÉDER AU JEU";
-                loginBtn.disabled = false;
+                // Réinitialiser le bouton après l'opération
+                mainActionButton.innerText = "ACCÉDER AU JEU";
+                mainActionButton.disabled = false;
             }
         });
         
+        // Lancer l'initialisation quand la page est chargée
         initializeTelegram();
 
     </script>
