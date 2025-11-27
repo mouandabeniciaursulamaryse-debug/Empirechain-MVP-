@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - NEXUS ALPHA</title>
+    <title>EMPIRE CHAIN - THE SOVEREIGN</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;600&display=swap');
 
-        /* --- Global Reset & Body --- */
+        /* --- Global Reset & Body (Profond) --- */
         body {
             margin: 0;
             padding: 0;
@@ -16,121 +16,108 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #0d1117; /* Fond Deep Dark */
+            background-color: #0c0d12; /* Fond Noir/Bleu très sombre */
             font-family: 'Inter', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- Nexus Background (Soft Blue Pulse) --- */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
-            background: #2a6fdb;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            filter: blur(150px);
-            opacity: 0.2;
-            animation: backgroundPulse 10s infinite alternate ease-in-out;
-            z-index: -1;
-        }
-        @keyframes backgroundPulse {
-            from { transform: translate(-50%, -50%) scale(1); }
-            to { transform: translate(-50%, -50%) scale(1.2); }
-        }
-
-        /* --- Interface Container (Apple/Vibrancy Blur) --- */
+        /* --- Interface Container (Vibrancy & Autorité) --- */
         .interface-container {
             position: relative;
             width: 90%;
             max-width: 400px;
-            background: rgba(255, 255, 255, 0.05); /* Très légère transparence */
-            backdrop-filter: blur(30px) saturate(180%); /* Flou intense à la Apple */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
+            background: rgba(10, 10, 15, 0.7); /* Obscurité profonde */
+            backdrop-filter: blur(20px) brightness(120%);
+            border: 1px solid rgba(255, 215, 0, 0.2); /* Cadre Or subtil */
+            border-radius: 20px;
             padding: 50px 30px;
             box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.6), 
-                0 0 10px rgba(255, 255, 255, 0.1);
+                0 25px 50px rgba(0, 0, 0, 0.7), 
+                0 0 10px rgba(255, 215, 0, 0.1);
             text-align: center;
-            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+            animation: slideIn 1s ease-out forwards;
             z-index: 1;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Title & Status --- */
+        /* --- Title & Subtitle --- */
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 30px;
-            letter-spacing: 5px;
-            color: #38bdf8; /* Cyan Brillant */
+            font-size: 32px;
+            letter-spacing: 6px;
+            font-weight: 900; /* Extra Bold */
+            color: #ffd700; /* Or Pur */
             margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
             text-transform: uppercase;
         }
         .subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             color: #94a3b8;
             margin-bottom: 40px;
+            font-weight: 300;
         }
 
-        /* --- USERNAME DISPLAY --- */
+        /* --- STATIC CREST / EMBLEM --- */
+        .static-crest {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 40px;
+            position: relative;
+            /* Simple CSS Diamond/Shield Shape */
+            transform: rotate(45deg); 
+            background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            border: 2px solid #fff;
+            animation: none; /* AUCUNE ROTATION */
+        }
+        .static-crest::before {
+             /* La petite croix interne, symbolisant l'ordre */
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* --- USERNAME DISPLAY (Status) --- */
         #usernameDisplay {
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffd700; /* Or */
-            margin-bottom: 30px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #38bdf8; /* Cyan pour les données d'identification */
+            margin-bottom: 40px;
             letter-spacing: 1px;
             min-height: 25px;
-            /* Animation Scramble/Typewriter intégrée */
-        }
-        
-        /* --- Central Core --- */
-        .central-core {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 40px;
-            border-radius: 50%;
-            border: 3px solid #38bdf8;
-            background: radial-gradient(circle at 70% 30%, #4a00e0, #1e3a8a);
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.1);
-            animation: rotate3D 15s linear infinite; /* Animation de rotation 3D */
-            transform-style: preserve-3d;
-            perspective: 800px;
-            position: relative;
-        }
-        @keyframes rotate3D {
-            0% { transform: rotateY(0deg) rotateX(0deg); }
-            50% { transform: rotateY(360deg) rotateX(15deg); }
-            100% { transform: rotateY(720deg) rotateX(0deg); }
+            transition: color 0.5s;
         }
 
-        /* --- Action Button (Vibrancy Effect) --- */
+        /* --- Action Button (Financement de l'Empire) --- */
         .btn-action {
             width: 100%;
-            padding: 18px;
-            border-radius: 15px;
+            padding: 20px;
+            border-radius: 10px;
             border: none;
-            background: #38bdf8; /* Cyan Uni */
+            background: linear-gradient(135deg, #ffd700 0%, #daa520 100%); /* Or Gradient */
             color: #000;
-            font-weight: 700;
-            font-size: 15px;
+            font-weight: 800;
+            font-size: 16px;
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
         }
         .btn-action:hover {
-            transform: translateY(-3px) scale(1.01);
-            background: #60a5fa; /* Bleu plus doux */
-            box-shadow: 0 12px 40px rgba(56, 189, 248, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
         }
         
         /* --- Status Message --- */
@@ -139,61 +126,40 @@
             font-size: 14px;
             color: #aebfd7;
             min-height: 20px;
-            opacity: 0;
-            transition: opacity 0.6s ease;
+            opacity: 1;
+            transition: color 0.5s ease;
         }
 
     </style>
 </head>
 <body>
     <div class="interface-container">
-        <h1>NEXUS ALPHA</h1>
-        <div class="subtitle">SYNCHRONISATION DES DONNÉES TITAN</div>
+        <h1>EMPIRE CHAIN</h1>
+        <div class="subtitle">PORTAIL D'ACCÈS DU SOUVERAIN</div>
+
+        <div class="static-crest" id="crestVisual"></div>
 
         <div id="usernameDisplay">INITIALISATION...</div>
 
-        <div class="central-core" id="centralCore"></div>
-
-        <button class="btn-action" id="saveBtn">COMMENCER LE JEU</button>
+        <button class="btn-action" id="saveBtn">DÉMARRER LA SESSION</button>
         
-        <div id="status-message">EN ATTENTE D'AUTORISATION...</div>
+        <div id="status-message">VÉRIFICATION DU PROTOCOLE (1/3)</div>
     </div>
 
     <script>
         const statusMsg = document.getElementById('status-message');
         const usernameDisplay = document.getElementById('usernameDisplay');
         const saveBtn = document.getElementById('saveBtn');
-        let telegramUsername = 'UNKNOWN_USER'; // Par défaut
+        let telegramUsername = 'UNKNOWN_USER'; 
 
         // ---------------------------------------------
-        // A. Fonction d'Animation de Texte "Scramble"
-        // ---------------------------------------------
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:"<>?';
-        function scrambleText(element, text, duration = 1000) {
-            let iteration = 0;
-            const interval = setInterval(() => {
-                element.innerText = text.split("")
-                    .map((char, index) => {
-                        if (index < iteration) {
-                            return text[index];
-                        }
-                        return characters[Math.floor(Math.random() * characters.length)];
-                    })
-                    .join("");
-                
-                if (iteration >= text.length) {
-                    clearInterval(interval);
-                }
-                iteration += 1 / 3;
-            }, 30);
-        }
-
-        // ---------------------------------------------
-        // B. Connexion et Récupération du Nom d'Utilisateur
+        // A. Connexion et Récupération du Nom d'Utilisateur
         // ---------------------------------------------
         function initializeTelegram() {
+            usernameDisplay.innerText = "CONNEXION SÉCURISÉE...";
+            statusMsg.innerText = "VÉRIFICATION DU PROTOCOLE (2/3)";
+
             try {
-                // Initialisation de la mini-app
                 if (window.Telegram && window.Telegram.WebApp) {
                      window.Telegram.WebApp.ready();
 
@@ -201,68 +167,62 @@
                     if (user && user.username) {
                         telegramUsername = `@${user.username}`;
                     } else if (user && user.id) {
-                         // Si pas de username, utiliser l'ID pour l'identification
-                         telegramUsername = `ID TITAN ${user.id}`;
+                         // Si pas de username, utiliser l'ID
+                         telegramUsername = `TITAN-ID-${user.id}`;
                     }
                 }
             } catch (e) {
                 // Pour le test hors de Telegram
-                console.warn("SDK Telegram non disponible. Utilisation d'un ID de test.");
-                telegramUsername = "@TEST_BENICIA_ALPHA";
+                console.warn("SDK Telegram non disponible. Mode de test activé.");
+                telegramUsername = "@BENICIA_ALPHA";
             }
             
-            // Afficher le nom d'utilisateur avec l'animation
-            scrambleText(usernameDisplay, telegramUsername);
+            // Affichage de l'utilisateur (Pas d'animation Scramble)
+            usernameDisplay.innerText = `SESSION ACTIVE: ${telegramUsername}`;
             
-            statusMsg.innerText = "CLÉ TITAN OBTENUE. PRÊT À COMMENCER.";
-            statusMsg.style.opacity = 1;
-
+            statusMsg.innerText = "CLÉ SOUVERAINE OBTENUE. PRÊT AU LANCEMENT.";
+            statusMsg.style.color = "#10b981"; // Vert succès
             saveBtn.disabled = false;
         }
 
         // ---------------------------------------------
-        // C. Logique de Démarrage (Sauvegarde des données)
+        // B. Logique de Démarrage (Sauvegarde des données)
         // ---------------------------------------------
         document.getElementById('saveBtn').addEventListener('click', async () => {
             
             statusMsg.style.opacity = 0;
-            saveBtn.innerText = "SYNCHRONISATION...";
-            saveBtn.style.boxShadow = "0 0 40px rgba(56, 189, 248, 0.8) inset";
+            saveBtn.innerText = "SYNCHRONISATION EN COURS...";
+            saveBtn.style.background = "linear-gradient(135deg, #1e3a8a, #3b82f6)"; /* Bleu de travail */
 
             try {
-                // Envoi de l'ID utilisateur (réel ou de test) et des données initiales
                 const response = await fetch('/api/save_wealth', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
-                        userId: telegramUsername, // L'ID utilisateur unique
+                        userId: telegramUsername, 
                         wealth: 1000, 
-                        name: "Fief du " + telegramUsername
+                        name: "Actif Initial de " + telegramUsername
                     })
                 });
 
                 if (response.ok) {
-                    statusMsg.innerText = "CONNEXION ÉTABLIE. ENTRÉE DANS L'EMPIRE...";
-                    statusMsg.style.color = "#32cd32"; 
+                    statusMsg.innerText = "INITIATION RÉUSSIE. L'EMPIRE VOUS ATTEND.";
+                    statusMsg.style.color = "#10b981"; 
                     statusMsg.style.opacity = 1;
-                    
-                    // Optionnel: Fermer la mini-app après succès (pour retour au bot)
-                    // window.Telegram.WebApp.close(); 
 
                 } else {
                     throw new Error("Erreur Serveur: " + response.statusText);
                 }
             } catch (error) {
-                statusMsg.innerText = "ERREUR FATALE. PROTOCOLE ÉCHOUÉ.";
+                statusMsg.innerText = "ERREUR: ÉCHEC DE L'INITIATION DES ACTIFS.";
                 statusMsg.style.color = "#ff4d4d";
                 statusMsg.style.opacity = 1;
             } finally {
-                saveBtn.innerText = "COMMENCER LE JEU";
-                saveBtn.style.boxShadow = "none"; 
+                saveBtn.innerText = "SESSION DÉMARRÉE";
+                saveBtn.style.background = "linear-gradient(135deg, #ffd700 0%, #daa520 100%)"; /* Retour Or */
             }
         });
         
-        // Démarrer l'initialisation dès le chargement de la page
         initializeTelegram();
 
     </script>
