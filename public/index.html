@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - CELESTIAL HUB</title>
+    <title>EMPIRE CHAIN - LUMINOUS CORE</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
 
         /* --- Global Reset & Body (Vibrant) --- */
         body {
@@ -17,67 +17,86 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #1a0a2c; /* Fond Violet Profond */
-            font-family: 'Poppins', sans-serif;
+            background-color: #120822; /* Fond Violet Très Profond */
+            font-family: 'Inter', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- Dynamic Orb Background --- */
+        /* --- Dynamic Orb Background (More subtle glow) --- */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px); /* Flou très prononcé */
-            opacity: 0.6;
-            animation: orbMove 15s infinite alternate ease-in-out;
+            filter: blur(100px); 
+            opacity: 0.7;
+            animation: orbMove 20s infinite alternate ease-in-out; /* Mouvement plus lent */
             z-index: -1;
         }
-        .orb.blue { background-color: #6a11cb; width: 250px; height: 250px; top: 10%; left: 10%; animation-delay: 0s; }
-        .orb.purple { background-color: #2575fc; width: 300px; height: 300px; bottom: 15%; right: 5%; animation-delay: 5s; }
-        .orb.pink { background-color: #ff007f; width: 200px; height: 200px; top: 30%; right: 20%; animation-delay: 10s; }
-        .orb.orange { background-color: #ffa500; width: 280px; height: 280px; bottom: 5%; left: 20%; animation-delay: 7s; }
+        .orb.blue { background-color: #6a11cb; width: 280px; height: 280px; top: 15%; left: 15%; animation-delay: 0s; }
+        .orb.purple { background-color: #2575fc; width: 330px; height: 330px; bottom: 20%; right: 10%; animation-delay: 5s; }
+        .orb.pink { background-color: #ff007f; width: 220px; height: 220px; top: 35%; right: 25%; animation-delay: 10s; }
 
         @keyframes orbMove {
             0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(20vw, 10vh) scale(1.1); }
-            66% { transform: translate(-10vw, -15vh) scale(0.9); }
+            50% { transform: translate(10vw, 10vh) scale(1.1); }
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- Interface Container (Glassmorphism Pur) --- */
+        /* --- Interface Container (Glassmorphism + Energy Field) --- */
         .interface-container {
             position: relative;
             width: 90%;
-            max-width: 480px;
-            background: rgba(255, 255, 255, 0.08); /* Très transparent */
-            backdrop-filter: blur(25px) saturate(180%); /* Flou et saturation intenses */
+            max-width: 350px; /* Compact et élégant */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 25px;
-            padding: 50px 35px;
+            padding: 50px 30px;
             box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.5), /* Ombre douce */
-                0 0 0 2px rgba(255, 255, 255, 0.05) inset; /* Bordure interne subtile */
+                0 20px 60px rgba(0, 0, 0, 0.6), 
+                0 0 40px rgba(106, 17, 203, 0.3); /* Vague de lumière violette */
             text-align: center;
             opacity: 0;
             animation: fadeInScale 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             z-index: 1;
+            /* Animation de bordure subtile */
+            border-image-source: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-image-slice: 1;
+            animation: pulseBorder 10s infinite linear;
         }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
-        /* --- Title & Subtitle --- */
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: #e0f2fe; /* Bleu Clair */
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(224, 242, 254, 0.3);
+        /* Bordure animée pour simuler l'énergie */
+        @keyframes pulseBorder {
+            0% { border-image-source: linear-gradient(45deg, #6a11cb, #2575fc); }
+            50% { border-image-source: linear-gradient(45deg, #ff007f, #6a11cb); }
+            100% { border-image-source: linear-gradient(45deg, #6a11cb, #2575fc); }
         }
+
+        /* --- Title & Subtitle (MAX GLOW) --- */
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 30px;
+            font-weight: 900;
+            color: #e0f2fe; 
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 0 10px rgba(224, 242, 254, 0.5), /* Glow principal */
+                0 0 20px rgba(224, 242, 254, 0.3);
+            text-transform: uppercase;
+            /* Animation de texte subtile (Glitch/Scanline) */
+            animation: textGlow 2s infinite alternate;
+        }
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px rgba(224, 242, 254, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(255, 0, 127, 0.7); } /* Changement de couleur au milieu */
+            100% { text-shadow: 0 0 10px rgba(224, 242, 254, 0.5); }
+        }
+
         .subtitle {
-            font-family: 'Poppins', sans-serif;
-            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
             color: #a0aec0;
             margin-bottom: 40px;
             font-weight: 300;
@@ -90,56 +109,66 @@
             justify-content: center;
             margin-bottom: 30px;
             color: #ffffff;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
         .user-info i {
             margin-right: 10px;
-            color: #6366f1; /* Bleu Violet */
-            font-size: 24px;
+            color: #ff007f; /* Rose Vif */
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8);
         }
 
-        /* --- Central Icon (Subtil) --- */
+        /* --- Central Icon (Pulsation MAX) --- */
         .central-icon {
             margin: 0 auto 40px;
-            font-size: 60px;
-            color: #a78bfa; /* Violet doux */
-            text-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
-            animation: pulseIcon 2s infinite alternate ease-in-out;
+            font-size: 70px;
+            color: #6a11cb;
+            text-shadow: 
+                0 0 20px #6a11cb, /* Glow primaire */
+                0 0 40px #2575fc; /* Glow secondaire */
+            animation: pulseIcon 1.5s infinite alternate ease-in-out;
         }
         @keyframes pulseIcon {
             from { transform: scale(1); opacity: 0.8; }
-            to { transform: scale(1.05); opacity: 1; }
+            to { transform: scale(1.1); opacity: 1; }
         }
 
-        /* --- Action Button (Vibrant & Clean) --- */
+        /* --- Action Button (3D Press Effect + Glow) --- */
         .btn-action {
             width: 100%;
-            padding: 18px;
-            border-radius: 12px;
+            padding: 20px;
+            border-radius: 15px;
             border: none;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Dégradé Violet-Bleu */
+            background: linear-gradient(135deg, #ff007f 0%, #ff5c77 100%); /* Dégradé Rose/Magenta */
             color: white;
             font-weight: 700;
             font-size: 16px;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(37, 117, 252, 0.4);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            /* Effet 3D léger */
+            box-shadow: 0 10px 20px rgba(255, 0, 127, 0.5);
         }
         .btn-action:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 15px 40px rgba(37, 117, 252, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 0, 127, 0.8);
+        }
+        .btn-action:active {
+            transform: translateY(2px);
+            box-shadow: 0 5px 10px rgba(255, 0, 127, 0.5);
         }
         
         /* --- Status Message --- */
         #status-message {
             margin-top: 30px;
-            font-size: 14px;
+            font-size: 15px;
             color: #cbd5e0;
             min-height: 20px;
             opacity: 1;
+            /* Lueur sur le message de statut */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
         }
 
     </style>
@@ -148,15 +177,14 @@
     <div class="orb blue"></div>
     <div class="orb purple"></div>
     <div class="orb pink"></div>
-    <div class="orb orange"></div>
 
     <div class="interface-container">
         <h1>EMPIRE CHAIN</h1>
-        <div class="subtitle">PORTAIL DE SYNCHRONISATION CÉLESTE</div>
+        <div class="subtitle">PORTAIL D'ACCÈS DU COEUR LUMINEUX</div>
 
         <div class="user-info">
             <i class="fas fa-user-circle"></i> 
-            <span id="usernameDisplay">INITIALISATION DES DONNÉES...</span>
+            <span id="usernameDisplay">INITIALISATION DES SÉQUENCES...</span>
         </div>
 
         <div class="central-icon">
@@ -165,7 +193,7 @@
 
         <button class="btn-action" id="saveBtn" disabled>SYNCHRONISER ACTIFS</button>
         
-        <div id="status-message">VÉRIFICATION DU LIEN DE DONNÉES...</div>
+        <div id="status-message">VÉRIFICATION DU PROTOCOLE TÉLÉGRAMME...</div>
     </div>
 
     <script>
@@ -179,7 +207,7 @@
         // ---------------------------------------------
         function initializeTelegram() {
             setTimeout(() => {
-                usernameDisplay.innerText = "ACCÈS SÉCURISÉ...";
+                usernameDisplay.innerText = "ACCÈS SÉCURISÉ: ÉTABLI";
                 statusMsg.innerText = "CONNEXION AU RÉSEAU EMPIRE...";
             }, 500);
 
@@ -213,9 +241,8 @@
             
             statusMsg.style.opacity = 0;
             saveBtn.innerText = "TRAITEMENT DE LA TRANSACTION...";
-            saveBtn.style.background = "linear-gradient(135deg, #ff007f 0%, #ff5c77 100%)"; // Rose/Rouge de traitement
-            saveBtn.style.boxShadow = "0 10px 30px rgba(255, 0, 127, 0.6)";
-
+            saveBtn.style.background = "linear-gradient(135deg, #4cd964 0%, #32cd32 100%)"; // Vert pour l'action
+            saveBtn.style.boxShadow = "0 10px 30px rgba(76, 217, 100, 0.6)";
 
             try {
                 const response = await fetch('/api/save_wealth', {
@@ -242,8 +269,8 @@
                 statusMsg.style.opacity = 1;
             } finally {
                 saveBtn.innerText = "SYNCHRONISER ACTIFS";
-                saveBtn.style.background = "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)"; // Retour au dégradé initial
-                saveBtn.style.boxShadow = "0 10px 30px rgba(37, 117, 252, 0.4)";
+                saveBtn.style.background = "linear-gradient(135deg, #ff007f 0%, #ff5c77 100%)"; 
+                saveBtn.style.boxShadow = "0 10px 30px rgba(255, 0, 127, 0.4)";
             }
         });
         
