@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - STELLAR NEXUS</title>
+    <title>EMPIRE CHAIN - LIQUID FLOW</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
 
-        /* --- Global Reset & Body (Deep Space) --- */
+        /* --- Global Reset & Body (Deep Dark) --- */
         body {
             margin: 0;
             padding: 0;
@@ -17,211 +17,154 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #000000; /* Fond Noir Absolu */
+            background-color: #0d0d14; /* Fond Bleu Nuit Profond */
             font-family: 'Inter', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- Starfield Background (Static & Subtle Glow) --- */
-        .starfield {
+        /* --- Dynamic Orb Background (Liquid Flow) --- */
+        .orb {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 1px, transparent 2px),
-                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.1) 1px, transparent 2px),
-                radial-gradient(circle at 40% 60%, rgba(255,255,255,0.1) 1px, transparent 2px);
-            background-size: 150px 150px, 120px 120px, 180px 180px;
-            background-position: 0 0, 60px 60px, 90px 90px;
-            animation: moveStars 100s linear infinite;
+            border-radius: 50%;
+            filter: blur(150px); /* Ultra Flou */
+            opacity: 0.7;
+            animation: orbMove 40s infinite alternate ease-in-out; /* Mouvement très lent */
             z-index: -1;
-            filter: blur(0.5px); /* Légèrement flou pour la profondeur */
+            transition: all 5s ease-in-out; /* Transition douce pour le changement de couleur */
         }
-        @keyframes moveStars {
-            from { background-position: 0 0; }
-            to { background-position: 10000px 5000px; }
+        .orb.blue { background-color: #007bff; width: 350px; height: 350px; top: 10%; left: 5%; animation-delay: 0s; }
+        .orb.purple { background-color: #6f42c1; width: 400px; height: 400px; bottom: 5%; right: 10%; animation-delay: 15s; }
+        .orb.cyan { background-color: #17a2b8; width: 300px; height: 300px; top: 50%; right: 5%; animation-delay: 30s; }
+        
+        @keyframes orbMove {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(15vw, -5vh) scale(1.1) rotate(20deg); background-color: #007bff; }
+            66% { transform: translate(-10vw, 10vh) scale(0.9) rotate(-10deg); background-color: #6f42c1; }
+            100% { transform: translate(0, 0) scale(1); background-color: #17a2b8; }
         }
 
-        /* --- Interface Container (VERRE SOMBRE, COMPACT) --- */
-        .interface-container {
+        /* --- LOGIN CARD (LIQUID GLASS) --- */
+        .login-card {
             position: relative;
             width: 90%;
-            max-width: 300px; /* Encore plus compact */
-            /* Très sombre et peu lumineux */
-            background: rgba(0, 0, 0, 0.4); /* Plus sombre */
-            backdrop-filter: blur(20px) saturate(150%); 
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Bordure discrète */
-            border-radius: 20px;
-            padding: 40px 25px;
+            max-width: 320px; /* Compact */
+            /* ULTRA LIQUID GLASS */
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(40px) saturate(250%); /* Flou extrême et saturation */
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 30px;
+            padding: 40px 30px;
             box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.7); /* Ombre douce */
+                0 30px 80px rgba(0, 0, 0, 0.8), 
+                0 0 50px rgba(130, 20, 250, 0.3) inset; /* Effet de lumière interne */
             text-align: center;
             opacity: 0;
-            animation: fadeInScale 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            z-index: 1;
+            animation: fadeIn 1s ease-out forwards;
+            z-index: 10; /* Important pour que les orbes passent dessous */
         }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Title (Sombre par défaut, Glow au clic) --- */
+        /* --- Titre Connexion & Roue --- */
         h1 {
-            font-family: 'Inter', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #ccc; /* Gris clair par défaut */
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: all 0.5s ease-out; /* Pour l'animation de glow */
-            text-shadow: none; /* Pas de glow par défaut */
-        }
-        /* Classe pour activer le glow au clic */
-        h1.active-glow {
-            color: #e0f2fe; 
-            text-shadow: 
-                0 0 10px rgba(224, 242, 254, 0.6),
-                0 0 20px rgba(224, 242, 254, 0.4),
-                0 0 30px rgba(106, 17, 203, 0.3); /* Nuance de violet */
-        }
-
-
-        .subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            color: #888; /* Gris plus sombre */
+            font-size: 24px;
+            font-weight: 700;
+            color: #e0f7fa; /* Cyan très clair */
             margin-bottom: 30px;
-            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* --- User Info Display --- */
-        .user-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            color: #ddd; /* Plus sombre par défaut */
-            font-size: 15px;
+        /* --- Roue de chargement (Loader) --- */
+        .loader {
+            display: inline-block;
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            border: 3px solid #e0f7fa;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .loader.visible { opacity: 1; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- Message utilisateur --- */
+        #usernameDisplay {
+            font-size: 16px;
             font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .user-info i {
-            margin-right: 8px;
-            color: #888; /* Icône discrète */
-            font-size: 18px;
+            color: #4CAF50; /* Vert Succès */
+            margin-bottom: 40px;
+            min-height: 20px;
         }
 
-        /* --- Central Icon (Subtil) --- */
-        .central-icon {
-            margin: 0 auto 35px;
-            font-size: 60px;
-            color: #555; /* Icône très sombre par défaut */
-            text-shadow: none;
-            transition: all 0.5s ease-out;
-        }
-        /* Glow de l'icône au clic */
-        .central-icon.active-glow {
-            color: #00bcd4; /* Cyan pour l'icône activée */
-            text-shadow: 
-                0 0 15px #00bcd4,
-                0 0 30px rgba(0, 188, 212, 0.6);
-            animation: pulseIcon 1.5s infinite alternate ease-in-out;
-        }
-        @keyframes pulseIcon {
-            from { transform: scale(1); opacity: 0.8; }
-            to { transform: scale(1.05); opacity: 1; }
-        }
-
-        /* --- Action Button (Glow au Clic) --- */
+        /* --- Action Button (Simple et Efficace) --- */
         .btn-action {
             width: 100%;
-            padding: 18px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 10px;
             border: none;
-            background: linear-gradient(135deg, #444 0%, #666 100%); /* Gris sombre par défaut */
-            color: #eee;
+            background: linear-gradient(135deg, #007bff 0%, #00bcd4 100%); /* Dégradé Bleu/Cyan */
+            color: white;
             font-weight: 700;
             font-size: 15px;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.4);
             text-transform: uppercase;
         }
-        /* Glow spectaculaire au survol et actif */
         .btn-action:hover {
             transform: translateY(-2px);
-            background: linear-gradient(135deg, #ff4081 0%, #ff80ab 100%); /* Rose vif */
-            box-shadow: 
-                0 0 5px #ff4081, 
-                0 0 20px #ff4081, 
-                0 0 40px #ff4081, 
-                0 0 80px rgba(255, 64, 129, 0.8); 
-            color: #000; /* Texte noir sur bouton lumineux */
-        }
-        .btn-action:active {
-            transform: translateY(1px);
-            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+            box-shadow: 0 8px 30px rgba(0, 123, 255, 0.6);
         }
         
         /* --- Status Message --- */
         #status-message {
-            margin-top: 25px;
-            font-size: 14px;
-            color: #777; /* Gris sombre par défaut */
-            min-height: 20px;
-            opacity: 1;
-            text-shadow: none;
-            transition: all 0.5s ease-out;
-        }
-        /* Glow du message de statut au clic */
-        #status-message.active-glow {
-            color: #4cd964; 
-            text-shadow: 0 0 10px rgba(76, 217, 100, 0.7);
+            margin-top: 20px;
+            font-size: 13px;
+            color: #999;
+            min-height: 18px;
         }
 
     </style>
 </head>
 <body>
-    <div class="starfield"></div>
+    <div class="orb blue"></div>
+    <div class="orb purple"></div>
+    <div class="orb cyan"></div>
 
-    <div class="interface-container">
-        <h1 id="mainTitle">EMPIRE CHAIN</h1>
-        <div class="subtitle">PORTAIL D'ACCÈS DU NEXUS STELLAIRE</div>
-
-        <div class="user-info">
-            <i class="fas fa-user-circle"></i> 
-            <span id="usernameDisplay">INITIALISATION DES SÉQUENCES...</span>
-        </div>
-
-        <div class="central-icon" id="centralIcon">
-            <i class="fas fa-satellite-dish"></i>
-        </div>
-
-        <button class="btn-action" id="saveBtn" disabled>SYNCHRONISER ACTIFS</button>
+    <div class="login-card">
+        <h1>
+            CONNEXION
+            <span class="loader" id="loginLoader"></span>
+        </h1>
         
-        <div id="status-message">VÉRIFICATION DU PROTOCOLE TÉLÉGRAMME...</div>
+        <div id="usernameDisplay">VÉRIFICATION DU COMPTE TÉLÉGRAMME...</div>
+
+        <button class="btn-action" id="saveBtn" disabled>ACCÉDER À L'EMPIRE</button>
+        
+        <div id="status-message">Veuillez autoriser la connexion via Telegram.</div>
     </div>
 
     <script>
         const statusMsg = document.getElementById('status-message');
         const usernameDisplay = document.getElementById('usernameDisplay');
         const saveBtn = document.getElementById('saveBtn');
-        const mainTitle = document.getElementById('mainTitle');
-        const centralIcon = document.getElementById('centralIcon');
-
+        const loginLoader = document.getElementById('loginLoader');
         let telegramUsername = 'UNKNOWN_USER'; 
 
         // ---------------------------------------------
         // A. Connexion et Récupération du Nom d'Utilisateur
         // ---------------------------------------------
         function initializeTelegram() {
+            // 1. Afficher la roue de chargement
+            loginLoader.classList.add('visible');
+
             setTimeout(() => {
-                usernameDisplay.innerText = "ACCÈS SÉCURISÉ: ÉTABLI";
-                statusMsg.innerText = "CONNEXION AU RÉSEAU EMPIRE...";
+                usernameDisplay.innerText = "SYNCHRONISATION DES DONNÉES...";
             }, 500);
 
             setTimeout(() => {
@@ -237,30 +180,24 @@
                         }
                     }
                 } catch (e) {
-                    telegramUsername = "@BENICIA_ALPHA";
+                    telegramUsername = "@DEMO_USER_123";
                 }
                 
-                usernameDisplay.innerText = `IDENTIFIANT: ${telegramUsername}`;
-                statusMsg.innerText = "LIEN STABILISÉ. PRÊT À LA SYNCHRONISATION.";
-                statusMsg.style.color = "#4cd964"; 
+                // 2. Cacher la roue et afficher le nom
+                loginLoader.classList.remove('visible');
+                usernameDisplay.innerText = `BIENVENUE, ${telegramUsername}`;
+                statusMsg.innerText = "Authentification réussie. Prêt à continuer.";
                 saveBtn.disabled = false;
-            }, 1500);
+            }, 2000);
         }
 
         // ---------------------------------------------
-        // B. Logique de Sauvegarde (Synchronisation des Actifs)
+        // B. Logique de Sauvegarde
         // ---------------------------------------------
         document.getElementById('saveBtn').addEventListener('click', async () => {
             
-            // Activer les effets de glow au clic
-            mainTitle.classList.add('active-glow');
-            centralIcon.classList.add('active-glow');
-            statusMsg.classList.add('active-glow');
-
-            statusMsg.style.opacity = 0;
-            saveBtn.innerText = "TRAITEMENT DE LA TRANSACTION...";
-            saveBtn.style.background = "linear-gradient(135deg, #4cd964 0%, #32cd32 100%)";
-            saveBtn.style.boxShadow = "0 10px 30px rgba(76, 217, 100, 0.6)";
+            saveBtn.innerText = "CONNEXION EN COURS...";
+            saveBtn.disabled = true;
 
             try {
                 const response = await fetch('/api/save_wealth', {
@@ -274,28 +211,18 @@
                 });
 
                 if (response.ok) {
-                    statusMsg.innerText = "ACTIFS SYNCHRONISÉS. L'EMPIRE PROSPÈRE.";
-                    statusMsg.style.color = "#4cd964"; 
-                    statusMsg.style.opacity = 1;
-
+                    statusMsg.innerText = "ACCÈS AUTORISÉ. DÉMARRAGE DU JEU.";
+                    statusMsg.style.color = "#4CAF50"; 
+                    // Ici, vous ajouteriez la logique de navigation vers la page de jeu
                 } else {
                     throw new Error("Erreur Serveur: " + response.statusText);
                 }
             } catch (error) {
-                statusMsg.innerText = "ERREUR: ÉCHEC DE LA SYNCHRONISATION DES ACTIFS.";
-                statusMsg.style.color = "#ff4d4d";
-                statusMsg.style.opacity = 1;
+                statusMsg.innerText = "ERREUR DE CONNEXION. Veuillez réessayer.";
+                statusMsg.style.color = "#FF5733";
             } finally {
-                saveBtn.innerText = "SYNCHRONISER ACTIFS";
-                saveBtn.style.background = ""; // Revient au style par défaut via CSS
-                saveBtn.style.boxShadow = ""; // Revient au style par défaut via CSS
-
-                // Désactiver les effets de glow après un délai pour le feedback
-                setTimeout(() => {
-                    mainTitle.classList.remove('active-glow');
-                    centralIcon.classList.remove('active-glow');
-                    statusMsg.classList.remove('active-glow');
-                }, 2000); // Garde le glow pendant 2 secondes
+                saveBtn.innerText = "ACCÉDER À L'EMPIRE";
+                saveBtn.disabled = false;
             }
         });
         
