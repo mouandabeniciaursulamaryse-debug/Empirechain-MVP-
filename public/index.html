@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - ABYSSAL GLOW</title>
+    <title>EMPIRE CHAIN - STELLAR NEXUS</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
 
-        /* --- Global Reset & Body (ABYSSAL DARK) --- */
+        /* --- Global Reset & Body (Deep Space) --- */
         body {
             margin: 0;
             padding: 0;
@@ -17,137 +17,187 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #000000; /* Noir Absolu */
-            background-image: radial-gradient(circle at 50% 50%, #150525 0%, #000000 100%);
+            background-color: #000000; /* Fond Noir Absolu */
             font-family: 'Inter', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- Dynamic Orb Background (Très Flou, Fort Contraste) --- */
-        .orb {
+        /* --- Starfield Background (Static & Subtle Glow) --- */
+        .starfield {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(120px); /* Encore plus flou */
-            opacity: 0.8;
-            animation: orbMove 20s infinite alternate ease-in-out; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 1px, transparent 2px),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.1) 1px, transparent 2px),
+                radial-gradient(circle at 40% 60%, rgba(255,255,255,0.1) 1px, transparent 2px);
+            background-size: 150px 150px, 120px 120px, 180px 180px;
+            background-position: 0 0, 60px 60px, 90px 90px;
+            animation: moveStars 100s linear infinite;
             z-index: -1;
+            filter: blur(0.5px); /* Légèrement flou pour la profondeur */
         }
-        .orb.blue { background-color: #00bcd4; width: 300px; height: 300px; top: 10%; left: 10%; animation-delay: 0s; } /* Cyan Vif */
-        .orb.purple { background-color: #9c27b0; width: 350px; height: 350px; bottom: 15%; right: 5%; animation-delay: 5s; } /* Violet Vif */
-        .orb.pink { background-color: #ff4081; width: 250px; height: 250px; top: 30%; right: 20%; animation-delay: 10s; } /* Rose/Magenta Vif */
-
-        @keyframes orbMove {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(15vw, 15vh) scale(1.1); }
-            100% { transform: translate(0, 0) scale(1); }
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 10000px 5000px; }
         }
 
-        /* --- Interface Container (Glassmorphism + Bordure Glow) --- */
+        /* --- Interface Container (VERRE SOMBRE, COMPACT) --- */
         .interface-container {
             position: relative;
             width: 90%;
-            max-width: 350px; 
-            /* Moins transparent que V8 pour une meilleure visibilité */
-            background: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(35px) saturate(200%); /* Flou intense */
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure plus visible */
-            border-radius: 25px;
-            padding: 50px 30px;
+            max-width: 300px; /* Encore plus compact */
+            /* Très sombre et peu lumineux */
+            background: rgba(0, 0, 0, 0.4); /* Plus sombre */
+            backdrop-filter: blur(20px) saturate(150%); 
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Bordure discrète */
+            border-radius: 20px;
+            padding: 40px 25px;
             box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.8), 
-                0 0 50px rgba(106, 17, 203, 0.4); 
+                0 20px 50px rgba(0, 0, 0, 0.7); /* Ombre douce */
             text-align: center;
             opacity: 0;
             animation: fadeInScale 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             z-index: 1;
         }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        /* --- Title & Subtitle (MAX GLOW) --- */
+        /* --- Title (Sombre par défaut, Glow au clic) --- */
         h1 {
             font-family: 'Inter', sans-serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 900;
-            color: #ffffff; 
+            color: #ccc; /* Gris clair par défaut */
             margin-bottom: 5px;
             letter-spacing: 2px;
-            /* Glow très fort pour le titre */
-            text-shadow: 
-                0 0 15px rgba(255, 255, 255, 0.7),
-                0 0 30px rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
+            transition: all 0.5s ease-out; /* Pour l'animation de glow */
+            text-shadow: none; /* Pas de glow par défaut */
+        }
+        /* Classe pour activer le glow au clic */
+        h1.active-glow {
+            color: #e0f2fe; 
+            text-shadow: 
+                0 0 10px rgba(224, 242, 254, 0.6),
+                0 0 20px rgba(224, 242, 254, 0.4),
+                0 0 30px rgba(106, 17, 203, 0.3); /* Nuance de violet */
         }
 
-        /* --- Central Icon (Pulsation MAX) --- */
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #888; /* Gris plus sombre */
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        /* --- User Info Display --- */
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: #ddd; /* Plus sombre par défaut */
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .user-info i {
+            margin-right: 8px;
+            color: #888; /* Icône discrète */
+            font-size: 18px;
+        }
+
+        /* --- Central Icon (Subtil) --- */
         .central-icon {
-            margin: 0 auto 40px;
-            font-size: 70px;
-            color: #00bcd4; /* Cyan pour le contraste */
+            margin: 0 auto 35px;
+            font-size: 60px;
+            color: #555; /* Icône très sombre par défaut */
+            text-shadow: none;
+            transition: all 0.5s ease-out;
+        }
+        /* Glow de l'icône au clic */
+        .central-icon.active-glow {
+            color: #00bcd4; /* Cyan pour l'icône activée */
             text-shadow: 
-                0 0 20px #00bcd4, 
-                0 0 40px #9c27b0; 
+                0 0 15px #00bcd4,
+                0 0 30px rgba(0, 188, 212, 0.6);
             animation: pulseIcon 1.5s infinite alternate ease-in-out;
         }
-
-        /* --- Action Button (SPECTACULAR GLOW) --- */
-        .btn-action {
-            width: 100%;
-            padding: 20px;
-            border-radius: 15px;
-            border: none;
-            background: linear-gradient(135deg, #ff4081 0%, #ff80ab 100%); /* Rose Vif */
-            color: #000000; /* Texte Noir sur Bouton Lumineux */
-            font-weight: 900;
-            font-size: 17px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-            /* Box-shadow initiale légère */
-            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
-            text-transform: uppercase;
+        @keyframes pulseIcon {
+            from { transform: scale(1); opacity: 0.8; }
+            to { transform: scale(1.05); opacity: 1; }
         }
 
-        /* Effet Glow TRÈS Fort au survol/clic */
+        /* --- Action Button (Glow au Clic) --- */
+        .btn-action {
+            width: 100%;
+            padding: 18px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #444 0%, #666 100%); /* Gris sombre par défaut */
+            color: #eee;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+        }
+        /* Glow spectaculaire au survol et actif */
         .btn-action:hover {
-            transform: translateY(-3px);
-            /* Glow intense, très visible */
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #ff4081 0%, #ff80ab 100%); /* Rose vif */
             box-shadow: 
                 0 0 5px #ff4081, 
                 0 0 20px #ff4081, 
                 0 0 40px #ff4081, 
                 0 0 80px rgba(255, 64, 129, 0.8); 
+            color: #000; /* Texte noir sur bouton lumineux */
         }
         .btn-action:active {
             transform: translateY(1px);
             box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
         }
         
-        /* --- Autres styles (inchangés mais inclus pour la refonte totale) --- */
-        .subtitle { font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aec0; margin-bottom: 40px; font-weight: 300; }
-        .user-info { display: flex; align-items: center; justify-content: center; margin-bottom: 30px; color: #ffffff; font-size: 16px; font-weight: 600; letter-spacing: 0.5px; }
-        .user-info i { margin-right: 10px; color: #9c27b0; font-size: 20px; text-shadow: 0 0 10px rgba(156, 39, 176, 0.8); }
-        #status-message { margin-top: 30px; font-size: 15px; color: #cbd5e0; min-height: 20px; opacity: 1; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        @keyframes pulseIcon { from { transform: scale(1); opacity: 0.8; } to { transform: scale(1.1); opacity: 1; } }
+        /* --- Status Message --- */
+        #status-message {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #777; /* Gris sombre par défaut */
+            min-height: 20px;
+            opacity: 1;
+            text-shadow: none;
+            transition: all 0.5s ease-out;
+        }
+        /* Glow du message de statut au clic */
+        #status-message.active-glow {
+            color: #4cd964; 
+            text-shadow: 0 0 10px rgba(76, 217, 100, 0.7);
+        }
 
     </style>
 </head>
 <body>
-    <div class="orb blue"></div>
-    <div class="orb purple"></div>
-    <div class="orb pink"></div>
+    <div class="starfield"></div>
 
     <div class="interface-container">
-        <h1>EMPIRE CHAIN</h1>
-        <div class="subtitle">PORTAIL D'ACCÈS DU COEUR LUMINEUX</div>
+        <h1 id="mainTitle">EMPIRE CHAIN</h1>
+        <div class="subtitle">PORTAIL D'ACCÈS DU NEXUS STELLAIRE</div>
 
         <div class="user-info">
             <i class="fas fa-user-circle"></i> 
             <span id="usernameDisplay">INITIALISATION DES SÉQUENCES...</span>
         </div>
 
-        <div class="central-icon">
+        <div class="central-icon" id="centralIcon">
             <i class="fas fa-satellite-dish"></i>
         </div>
 
@@ -160,6 +210,9 @@
         const statusMsg = document.getElementById('status-message');
         const usernameDisplay = document.getElementById('usernameDisplay');
         const saveBtn = document.getElementById('saveBtn');
+        const mainTitle = document.getElementById('mainTitle');
+        const centralIcon = document.getElementById('centralIcon');
+
         let telegramUsername = 'UNKNOWN_USER'; 
 
         // ---------------------------------------------
@@ -199,6 +252,11 @@
         // ---------------------------------------------
         document.getElementById('saveBtn').addEventListener('click', async () => {
             
+            // Activer les effets de glow au clic
+            mainTitle.classList.add('active-glow');
+            centralIcon.classList.add('active-glow');
+            statusMsg.classList.add('active-glow');
+
             statusMsg.style.opacity = 0;
             saveBtn.innerText = "TRAITEMENT DE LA TRANSACTION...";
             saveBtn.style.background = "linear-gradient(135deg, #4cd964 0%, #32cd32 100%)";
@@ -229,8 +287,15 @@
                 statusMsg.style.opacity = 1;
             } finally {
                 saveBtn.innerText = "SYNCHRONISER ACTIFS";
-                saveBtn.style.background = "linear-gradient(135deg, #ff4081 0%, #ff80ab 100%)";
-                saveBtn.style.boxShadow = "0 5px 15px rgba(255, 64, 129, 0.4)";
+                saveBtn.style.background = ""; // Revient au style par défaut via CSS
+                saveBtn.style.boxShadow = ""; // Revient au style par défaut via CSS
+
+                // Désactiver les effets de glow après un délai pour le feedback
+                setTimeout(() => {
+                    mainTitle.classList.remove('active-glow');
+                    centralIcon.classList.remove('active-glow');
+                    statusMsg.classList.remove('active-glow');
+                }, 2000); // Garde le glow pendant 2 secondes
             }
         });
         
