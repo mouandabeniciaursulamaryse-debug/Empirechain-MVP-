@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - LIQUID FLOW</title>
+    <title>EMPIRE CHAIN - SUBTLE AURA</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-        /* --- Global Reset & Body (Deep Dark) --- */
+        /* --- Global Reset & Body (Très Sombre, Texture Subtile) --- */
         body {
             margin: 0;
             padding: 0;
@@ -17,115 +17,158 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #0d0d14; /* Fond Bleu Nuit Profond */
+            background-color: #0b0b14; /* Fond Bleu Nuit Très Sombre */
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
             font-family: 'Inter', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- Dynamic Orb Background (Liquid Flow) --- */
+        /* --- Dynamic Orb Background (Discret et Flou) --- */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(150px); /* Ultra Flou */
-            opacity: 0.7;
-            animation: orbMove 40s infinite alternate ease-in-out; /* Mouvement très lent */
+            filter: blur(100px); /* Toujours flou, mais moins agressif */
+            opacity: 0.4; /* Très faible opacité */
+            animation: orbMove 30s infinite alternate ease-in-out; /* Plus lent */
             z-index: -1;
-            transition: all 5s ease-in-out; /* Transition douce pour le changement de couleur */
+            transition: background-color 10s ease-in-out; /* Transition de couleur plus longue */
         }
-        .orb.blue { background-color: #007bff; width: 350px; height: 350px; top: 10%; left: 5%; animation-delay: 0s; }
-        .orb.purple { background-color: #6f42c1; width: 400px; height: 400px; bottom: 5%; right: 10%; animation-delay: 15s; }
-        .orb.cyan { background-color: #17a2b8; width: 300px; height: 300px; top: 50%; right: 5%; animation-delay: 30s; }
+        .orb.blue { background-color: #4a00e0; width: 300px; height: 300px; top: 15%; left: 10%; animation-delay: 0s; }
+        .orb.purple { background-color: #8e2de2; width: 350px; height: 350px; bottom: 20%; right: 15%; animation-delay: 10s; }
+        .orb.magenta { background-color: #fc466b; width: 250px; height: 250px; top: 40%; right: 5%; animation-delay: 20s; }
         
         @keyframes orbMove {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(15vw, -5vh) scale(1.1) rotate(20deg); background-color: #007bff; }
-            66% { transform: translate(-10vw, 10vh) scale(0.9) rotate(-10deg); background-color: #6f42c1; }
-            100% { transform: translate(0, 0) scale(1); background-color: #17a2b8; }
+            0% { transform: translate(0, 0) scale(1); background-color: #4a00e0; }
+            33% { transform: translate(10vw, -5vh) scale(1.05); background-color: #8e2de2; }
+            66% { transform: translate(-5vw, 10vh) scale(0.95); background-color: #fc466b; }
+            100% { transform: translate(0, 0) scale(1); background-color: #4a00e0; }
         }
 
-        /* --- LOGIN CARD (LIQUID GLASS) --- */
+        /* --- LOGIN CARD (SUBTLE GLASSMORPHISM) --- */
         .login-card {
             position: relative;
             width: 90%;
-            max-width: 320px; /* Compact */
-            /* ULTRA LIQUID GLASS */
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(40px) saturate(250%); /* Flou extrême et saturation */
+            max-width: 340px; 
+            /* Moins transparent que Liquid Glass */
+            background: rgba(255, 255, 255, 0.08); /* Légèrement plus opaque */
+            backdrop-filter: blur(25px) saturate(180%); /* Flou doux */
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 30px;
+            border-radius: 20px;
             padding: 40px 30px;
             box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.8), 
-                0 0 50px rgba(130, 20, 250, 0.3) inset; /* Effet de lumière interne */
+                0 20px 60px rgba(0, 0, 0, 0.7); /* Ombre douce et profonde */
             text-align: center;
             opacity: 0;
             animation: fadeIn 1s ease-out forwards;
-            z-index: 10; /* Important pour que les orbes passent dessous */
+            z-index: 10; 
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Titre Connexion & Roue --- */
-        h1 {
+        /* --- Avatar Icon (Centré, avec un léger glow) --- */
+        .avatar-icon {
+            font-size: 70px;
+            color: #b0dfff; /* Bleu clair */
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(176, 223, 255, 0.3); /* Glow très faible */
+            animation: slowGlow 5s infinite alternate ease-in-out; /* Animation très lente */
+        }
+        @keyframes slowGlow {
+            from { text-shadow: 0 0 8px rgba(176, 223, 255, 0.2); }
+            to { text-shadow: 0 0 12px rgba(176, 223, 255, 0.4); }
+        }
+
+        /* --- Titre "Sign In" --- */
+        h2 {
             font-size: 24px;
-            font-weight: 700;
-            color: #e0f7fa; /* Cyan très clair */
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* --- Roue de chargement (Loader) --- */
-        .loader {
-            display: inline-block;
-            margin-left: 10px;
-            width: 18px;
-            height: 18px;
-            border: 3px solid #e0f7fa;
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .loader.visible { opacity: 1; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* --- Message utilisateur --- */
-        #usernameDisplay {
-            font-size: 16px;
             font-weight: 600;
-            color: #4CAF50; /* Vert Succès */
-            margin-bottom: 40px;
-            min-height: 20px;
+            color: #e0f2fe; /* Blanc bleuté */
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
         }
 
-        /* --- Action Button (Simple et Efficace) --- */
-        .btn-action {
+        /* --- Input Fields (Design épuré) --- */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            font-size: 16px;
+        }
+        .input-field {
+            width: calc(100% - 30px); /* Pour les icônes */
+            padding: 12px 15px 12px 45px; /* Padding pour l'icône */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05); /* Très léger fond */
+            color: #e0f2fe;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-field::placeholder {
+            color: #a0aec0;
+        }
+        .input-field:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.3); /* Glow très faible au focus */
+        }
+
+        /* --- "Create Account" Button (Glow Lent) --- */
+        .btn-create {
             width: 100%;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             border: none;
-            background: linear-gradient(135deg, #007bff 0%, #00bcd4 100%); /* Dégradé Bleu/Cyan */
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Dégradé Violet-Bleu */
             color: white;
-            font-weight: 700;
-            font-size: 15px;
+            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.4);
-            text-transform: uppercase;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 25px rgba(106, 17, 203, 0.2); /* Glow faible */
+            animation: buttonGlow 8s infinite alternate ease-in-out; /* Animation très lente */
         }
-        .btn-action:hover {
+        .btn-create:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 123, 255, 0.6);
+            box-shadow: 0 12px 30px rgba(106, 17, 203, 0.4); /* Glow légèrement plus fort au hover */
         }
-        
-        /* --- Status Message --- */
+        @keyframes buttonGlow {
+            from { box-shadow: 0 8px 25px rgba(106, 17, 203, 0.2); }
+            to { box-shadow: 0 8px 25px rgba(37, 117, 252, 0.3); } /* Change de couleur de glow */
+        }
+
+        /* --- Footer Link --- */
+        .footer-link {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #a0aec0;
+        }
+        .footer-link a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .footer-link a:hover {
+            color: #8e2de2;
+        }
+
+        /* --- Status Message (pour Telegram auto-login) --- */
         #status-message {
             margin-top: 20px;
             font-size: 13px;
-            color: #999;
+            color: #a0aec0;
             min-height: 18px;
         }
 
@@ -134,37 +177,40 @@
 <body>
     <div class="orb blue"></div>
     <div class="orb purple"></div>
-    <div class="orb cyan"></div>
+    <div class="orb magenta"></div>
 
     <div class="login-card">
-        <h1>
-            CONNEXION
-            <span class="loader" id="loginLoader"></span>
-        </h1>
-        
-        <div id="usernameDisplay">VÉRIFICATION DU COMPTE TÉLÉGRAMME...</div>
+        <div class="avatar-icon">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <h2>Connexion</h2>
 
-        <button class="btn-action" id="saveBtn" disabled>ACCÉDER À L'EMPIRE</button>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" class="input-field" placeholder="Nom d'utilisateur" value="Chargement Telegram..." disabled>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" class="input-field" placeholder="Mot de passe" value="***********" disabled>
+        </div>
+
+        <button class="btn-create" id="loginBtn">Créer un compte</button>
         
-        <div id="status-message">Veuillez autoriser la connexion via Telegram.</div>
+        <div class="footer-link">
+            Pas de compte ? <a href="#">S'inscrire ici</a>
+        </div>
+
+        <div id="status-message">Vérification de la session Telegram...</div>
     </div>
 
     <script>
         const statusMsg = document.getElementById('status-message');
-        const usernameDisplay = document.getElementById('usernameDisplay');
-        const saveBtn = document.getElementById('saveBtn');
-        const loginLoader = document.getElementById('loginLoader');
+        const loginBtn = document.getElementById('loginBtn'); // Renommé pour correspondre au texte
         let telegramUsername = 'UNKNOWN_USER'; 
 
-        // ---------------------------------------------
-        // A. Connexion et Récupération du Nom d'Utilisateur
-        // ---------------------------------------------
         function initializeTelegram() {
-            // 1. Afficher la roue de chargement
-            loginLoader.classList.add('visible');
-
             setTimeout(() => {
-                usernameDisplay.innerText = "SYNCHRONISATION DES DONNÉES...";
+                statusMsg.innerText = "Synchronisation des données utilisateur...";
             }, 500);
 
             setTimeout(() => {
@@ -180,24 +226,19 @@
                         }
                     }
                 } catch (e) {
-                    telegramUsername = "@DEMO_USER_123";
+                    telegramUsername = "@DEMO_USER_123"; // Pour le test hors Telegram
                 }
                 
-                // 2. Cacher la roue et afficher le nom
-                loginLoader.classList.remove('visible');
-                usernameDisplay.innerText = `BIENVENUE, ${telegramUsername}`;
-                statusMsg.innerText = "Authentification réussie. Prêt à continuer.";
-                saveBtn.disabled = false;
+                statusMsg.innerText = `Session ${telegramUsername} détectée. Prêt.`;
+                loginBtn.innerText = "ACCÉDER AU JEU"; // Change le texte du bouton une fois prêt
+                loginBtn.disabled = false; // Active le bouton
             }, 2000);
         }
 
-        // ---------------------------------------------
-        // B. Logique de Sauvegarde
-        // ---------------------------------------------
-        document.getElementById('saveBtn').addEventListener('click', async () => {
-            
-            saveBtn.innerText = "CONNEXION EN COURS...";
-            saveBtn.disabled = true;
+        loginBtn.addEventListener('click', async () => {
+            loginBtn.innerText = "ACCÈS EN COURS...";
+            loginBtn.disabled = true;
+            statusMsg.innerText = "Chargement des actifs de l'Empire...";
 
             try {
                 const response = await fetch('/api/save_wealth', {
@@ -211,18 +252,18 @@
                 });
 
                 if (response.ok) {
-                    statusMsg.innerText = "ACCÈS AUTORISÉ. DÉMARRAGE DU JEU.";
+                    statusMsg.innerText = "Bienvenue dans l'Empire Chain !";
                     statusMsg.style.color = "#4CAF50"; 
-                    // Ici, vous ajouteriez la logique de navigation vers la page de jeu
+                    // Ici, vous pourriez rediriger l'utilisateur vers la page de jeu réelle
                 } else {
                     throw new Error("Erreur Serveur: " + response.statusText);
                 }
             } catch (error) {
-                statusMsg.innerText = "ERREUR DE CONNEXION. Veuillez réessayer.";
+                statusMsg.innerText = "Échec de l'accès. Réessayez plus tard.";
                 statusMsg.style.color = "#FF5733";
             } finally {
-                saveBtn.innerText = "ACCÉDER À L'EMPIRE";
-                saveBtn.disabled = false;
+                loginBtn.innerText = "ACCÉDER AU JEU";
+                loginBtn.disabled = false;
             }
         });
         
