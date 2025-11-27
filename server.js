@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 // *******************************************************************
 // 🛑 CHAÎNE DE CONNEXION INTÉGRÉE (Votre clé secrète pour la mémoire)
 // *******************************************************************
-const MONGODB_URI = "mongodb+srv://Empirechain:Josie05*@cluster0.ar96sa0.mongodb.net/?appName=Cluster0"; 
+const MONGODB_URI = "mongodb+srv://Empirechaindev:Josie05@cluster0.ved0fdq.mongodb.net/?appName=Cluster0";
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
