@@ -9,7 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
-        /* --- Global Style (Hérité de l'Aura Stable) --- */
+        /* --- Base HTML/Body pour la Stabilité WebView --- */
         html, body {
             height: 100%;
             margin: 0;
@@ -58,7 +58,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* Glassmorphism subtil */
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(15px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -70,11 +69,11 @@
             font-size: 24px;
             font-weight: 900;
             color: #b0dfff;
-            text-shadow: 0 0 10px rgba(176, 223, 255, 0.1); /* Glow très subtil */
+            text-shadow: 0 0 10px rgba(176, 223, 255, 0.1); 
         }
         .score-display i {
             margin-right: 8px;
-            color: #ffc107; /* Couleur Or */
+            color: #ffc107; 
         }
         .profile-icon {
             font-size: 30px;
@@ -86,7 +85,31 @@
             color: #6a11cb;
         }
 
-        /* --- B. ZONE DE TAPPING (L'élément principal) --- */
+        /* --- Gestion des VUES (Accueil, Market, etc.) --- */
+        .view-container {
+            flex-grow: 1;
+            width: 100%;
+            position: relative;
+        }
+        .view {
+            position: absolute; /* Permet aux vues de se superposer */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none; /* Toutes les vues sont cachées par défaut */
+            overflow-y: auto; /* Permet le défilement dans la vue si nécessaire */
+            padding-bottom: 70px; /* Espace pour la barre de navigation */
+            box-sizing: border-box;
+            z-index: 1;
+        }
+        .view.active-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- ACCUEIL (TAP ZONE) View Styling --- */
         .tap-zone {
             flex-grow: 1;
             display: flex;
@@ -95,7 +118,6 @@
             width: 100%;
             position: relative;
         }
-
         #tapButton {
             width: 200px;
             height: 200px;
@@ -114,12 +136,11 @@
             transform: scale(0.95);
             box-shadow: 0 0 20px rgba(106, 17, 203, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.8);
         }
-
         .floating-score {
             position: absolute;
             font-size: 30px;
             font-weight: 900;
-            color: #4CAF50; /* Vert pour le gain */
+            color: #4CAF50; 
             opacity: 0;
             pointer-events: none;
             text-shadow: 0 0 5px rgba(76, 175, 80, 0.8);
@@ -130,6 +151,62 @@
             100% { transform: translateY(-100px); opacity: 0; }
         }
 
+        /* --- MARKET View Styling --- */
+        .market-header {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0 10px;
+        }
+        .market-header h3 {
+            font-size: 20px;
+            color: #e0f2fe;
+            margin: 0;
+            text-shadow: 0 0 5px rgba(176, 223, 255, 0.2);
+        }
+        .market-header p {
+            font-size: 13px;
+            color: #a0aec0;
+            margin-top: 5px;
+        }
+        .glass-card {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .market-content {
+            width: 100%;
+            padding: 20px 0;
+        }
+        .market-category {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin: 10px auto;
+            width: 90%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-weight: 600;
+            color: #b0dfff;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .market-category i {
+            margin-right: 15px;
+            font-size: 18px;
+            color: #ffc107;
+        }
+        .market-category:hover {
+             background: rgba(255, 255, 255, 0.1);
+        }
+
         /* --- C. FOOTER (Barre de navigation) --- */
         .nav-bar {
             width: 100%;
@@ -137,11 +214,10 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            /* Glassmorphism subtil */
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(15px); 
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 10;
+            z-index: 20; /* Toujours au-dessus */
         }
         .nav-item {
             display: flex;
@@ -159,7 +235,7 @@
         }
         .nav-item.active {
             color: #6a11cb;
-            text-shadow: 0 0 5px rgba(106, 17, 203, 0.5); /* Glow actif */
+            text-shadow: 0 0 5px rgba(106, 17, 203, 0.5); 
         }
     </style>
 </head>
@@ -178,28 +254,72 @@
         </div>
     </div>
 
-    <div class="tap-zone">
-        <button id="tapButton">
-            TAPPER
-        </button>
+    <div class="view-container">
+
+        <div class="view active-view" id="home-view">
+            <div class="tap-zone">
+                <button id="tapButton">
+                    TAPPER
+                </button>
+            </div>
         </div>
 
+        <div class="view" id="market-view">
+            <div class="market-header">
+                <h3>MARKET SOCIAL</h3>
+                <p>Achetez, vendez et échangez des actifs de luxe pour devenir un Titan.</p>
+            </div>
+            <div class="market-content">
+                <div class="market-category" data-category="entreprises"><i class="fas fa-building"></i> Entreprises</div>
+                <div class="market-category" data-category="ressources"><i class="fas fa-gem"></i> Ressources & Minerais</div>
+                <div class="market-category" data-category="luxe"><i class="fas fa-car"></i> Luxe & Véhicules Rares</div>
+                <div class="market-category" data-category="skins"><i class="fas fa-tshirt"></i> Skins & Fashion</div>
+            </div>
+        </div>
+
+        <div class="view" id="social-view">
+            <div class="market-header">
+                <h3>RÉSEAU SOCIAL</h3>
+                <p>Gagnez de l'influence, des followers et des likes (Instagram du jeu).</p>
+            </div>
+        </div>
+
+        <div class="view" id="inventory-view">
+            <div class="market-header">
+                <h3>INVENTAIRE</h3>
+                <p>Vos possessions, objets de collection et matières premières.</p>
+            </div>
+        </div>
+
+        <div class="view" id="missions-view">
+            <div class="market-header">
+                <h3>MISSIONS</h3>
+                <p>Devenez Mineur, Livreur, Garde du corps ou complétez des Quêtes de PNJ.</p>
+            </div>
+        </div>
+
+    </div>
+    
     <div class="nav-bar">
-        <div class="nav-item active">
+        <div class="nav-item active" id="nav-home">
             <i class="fas fa-home"></i>
             <span>Accueil</span>
         </div>
-        <div class="nav-item">
-            <i class="fas fa-rocket"></i>
-            <span>Boost</span>
+        <div class="nav-item" id="nav-market">
+            <i class="fas fa-store"></i> 
+            <span>Market</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" id="nav-social">
             <i class="fas fa-users"></i>
-            <span>Amis</span>
+            <span>Social</span>
         </div>
-        <div class="nav-item">
-            <i class="fas fa-gift"></i>
-            <span>Tâches</span>
+        <div class="nav-item" id="nav-inventory">
+            <i class="fas fa-archive"></i>
+            <span>Inventaire</span>
+        </div>
+        <div class="nav-item" id="nav-missions">
+            <i class="fas fa-gift"></i> 
+            <span>Missions</span>
         </div>
     </div>
 
@@ -207,18 +327,20 @@
         const tapButton = document.getElementById('tapButton');
         const scoreDisplay = document.getElementById('currentScore');
         const tapZone = document.querySelector('.tap-zone');
+        const navItems = document.querySelectorAll('.nav-item');
+        const views = document.querySelectorAll('.view');
         let currentScore = 1250;
         let tapValue = 1;
 
-        // Force l'expansion de la WebApp pour la pleine hauteur
+        // Force l'expansion de la WebApp pour la pleine hauteur (Stabilité Telegram)
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.ready();
             window.Telegram.WebApp.expand();
         }
 
+        // --- Logique de Score ---
         function updateScore(amount) {
             currentScore += amount;
-            // Met à jour l'affichage en format localisé (ex: 1,251)
             scoreDisplay.textContent = currentScore.toLocaleString(); 
         }
 
@@ -227,10 +349,8 @@
             scoreElement.classList.add('floating-score');
             scoreElement.textContent = `+${amount}`;
             
-            const buttonRect = tapButton.getBoundingClientRect();
-            
-            // Positionnement relatif au point de clic
-            // x et y sont relatifs au tapZone (le parent)
+            // Positionnement relatif à la Tap Zone
+            const tapZoneRect = tapZone.getBoundingClientRect();
             scoreElement.style.left = `${x}px`;
             scoreElement.style.top = `${y}px`;
             
@@ -250,6 +370,29 @@
             const clickY = event.clientY - tapZoneRect.top;
             
             createFloatingScore(clickX, clickY, tapValue);
+        });
+
+        // --- Logique de Navigation ---
+        function switchView(targetId) {
+            // 1. Cacher toutes les vues et désactiver tous les boutons
+            views.forEach(view => {
+                view.classList.remove('active-view');
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // 2. Afficher la vue cible et activer le bouton correspondant
+            document.getElementById(targetId).classList.add('active-view');
+            document.getElementById('nav-' + targetId.replace('-view', '')).classList.add('active');
+        }
+
+        // 3. Ajouter les écouteurs d'événements à la barre de navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const viewName = item.id.replace('nav-', '') + '-view';
+                switchView(viewName);
+            });
         });
 
     </script>
