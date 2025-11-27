@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>EMPIRE CHAIN - JEU PRINCIPAL</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+        /* --- Global Style (Hérité de l'Aura Stable) --- */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            overscroll-behavior: none;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #0b0b14; 
+            font-family: 'Inter', sans-serif;
+            color: white;
+            position: relative;
+            touch-action: manipulation;
+        }
+
+        /* --- Arrière-plan (Orbes et Flou Discret) --- */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px); 
+            opacity: 0.3; 
+            animation: orbMove 35s infinite alternate ease-in-out; 
+            z-index: 0;
+            will-change: transform, filter, opacity;
+        }
+        .orb.blue { background-color: #4a00e0; width: 220px; height: 220px; top: 18%; left: 12%; animation-delay: 0s; }
+        .orb.purple { background-color: #8e2de2; width: 280px; height: 280px; bottom: 22%; right: 18%; animation-delay: 10s; }
+        .orb.magenta { background-color: #fc466b; width: 180px; height: 180px; top: 42%; right: 8%; animation-delay: 20s; }
+        
+        @keyframes orbMove {
+            0% { transform: translate(0, 0) scale(1); background-color: #4a00e0; }
+            33% { transform: translate(10vw, -5vh) scale(1.03); background-color: #8e2de2; }
+            66% { transform: translate(-5vw, 10vh) scale(0.97); background-color: #fc466b; }
+            100% { transform: translate(0, 0) scale(1); background-color: #4a00e0; }
+        }
+
+        /* --- A. HEADER (Affichage des richesses) --- */
+        .header {
+            width: 100%;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Glassmorphism subtil */
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+        .score-display {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 900;
+            color: #b0dfff;
+            text-shadow: 0 0 10px rgba(176, 223, 255, 0.1); /* Glow très subtil */
+        }
+        .score-display i {
+            margin-right: 8px;
+            color: #ffc107; /* Couleur Or */
+        }
+        .profile-icon {
+            font-size: 30px;
+            color: #8e2de2;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .profile-icon:hover {
+            color: #6a11cb;
+        }
+
+        /* --- B. ZONE DE TAPPING (L'élément principal) --- */
+        .tap-zone {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        #tapButton {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #6a11cb 0%, #2575fc 100%);
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.1s ease-out;
+            box-shadow: 0 0 40px rgba(106, 17, 203, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            -webkit-tap-highlight-color: transparent;
+        }
+        #tapButton:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 20px rgba(106, 17, 203, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .floating-score {
+            position: absolute;
+            font-size: 30px;
+            font-weight: 900;
+            color: #4CAF50; /* Vert pour le gain */
+            opacity: 0;
+            pointer-events: none;
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.8);
+            animation: floatUp 0.8s ease-out forwards;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        /* --- C. FOOTER (Barre de navigation) --- */
+        .nav-bar {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /* Glassmorphism subtil */
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px); 
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .nav-item i {
+            font-size: 22px;
+            margin-bottom: 3px;
+        }
+        .nav-item.active {
+            color: #6a11cb;
+            text-shadow: 0 0 5px rgba(106, 17, 203, 0.5); /* Glow actif */
+        }
+    </style>
+</head>
+<body>
+    <div class="orb blue"></div>
+    <div class="orb purple"></div>
+    <div class="orb magenta"></div>
+
+    <div class="header">
+        <div class="score-display">
+            <i class="fas fa-coins"></i>
+            <span id="currentScore">1,250</span>
+        </div>
+        <div class="profile-icon">
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </div>
+
+    <div class="tap-zone">
+        <button id="tapButton">
+            TAPPER
+        </button>
+        </div>
+
+    <div class="nav-bar">
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span>Boost</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Amis</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-gift"></i>
+            <span>Tâches</span>
+        </div>
+    </div>
+
+    <script>
+        const tapButton = document.getElementById('tapButton');
+        const scoreDisplay = document.getElementById('currentScore');
+        const tapZone = document.querySelector('.tap-zone');
+        let currentScore = 1250;
+        let tapValue = 1;
+
+        function updateScore(amount) {
+            currentScore += amount;
+            scoreDisplay.textContent = currentScore.toLocaleString();
+        }
+
+        function createFloatingScore(x, y, amount) {
+            const scoreElement = document.createElement('div');
+            scoreElement.classList.add('floating-score');
+            scoreElement.textContent = `+${amount}`;
+            
+            // Calcul de la position par rapport au bouton
+            const buttonRect = tapButton.getBoundingClientRect();
+            
+            // Positionnement légèrement aléatoire autour du clic
+            scoreElement.style.left = `${x - buttonRect.left - 20 + (Math.random() * 40)}px`;
+            scoreElement.style.top = `${y - buttonRect.top - 20 + (Math.random() * 40)}px`;
+            
+            tapZone.appendChild(scoreElement);
+
+            // Retirer l'élément après l'animation
+            scoreElement.addEventListener('animationend', () => {
+                scoreElement.remove();
+            });
+        }
+
+        tapButton.addEventListener('click', (event) => {
+            updateScore(tapValue);
+            
+            // Calculer la position du clic relative à la zone de tapping
+            const tapZoneRect = tapZone.getBoundingClientRect();
+            const clickX = event.clientX - tapZoneRect.left;
+            const clickY = event.clientY - tapZoneRect.top;
+            
+            createFloatingScore(clickX, clickY, tapValue);
+        });
+
+        // Optionnel : Fonction pour initialiser Telegram WebApp (pour la pleine hauteur)
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+        }
+    </script>
+</body>
+</html>
