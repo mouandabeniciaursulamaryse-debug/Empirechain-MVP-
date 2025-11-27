@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - THE MONOLITH</title>
+    <title>EMPIRE CHAIN - CELESTIAL HUB</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-        /* --- Global Reset & Background (Deep Void) --- */
+        /* --- Global Reset & Body (Vibrant) --- */
         body {
             margin: 0;
             padding: 0;
@@ -16,156 +17,127 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #000000;
-            background-image: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
-            font-family: 'Inter', sans-serif;
+            background-color: #1a0a2c; /* Fond Violet Profond */
+            font-family: 'Poppins', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
-            /* Le champ de vision 3D est sur le body */
-            perspective: 1500px;
         }
 
-        /* --- Scanline Effect (Old-School Tech Luxe) --- */
-        body::before {
-            content: '';
+        /* --- Dynamic Orb Background --- */
+        .orb {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                #000000 0, 
-                rgba(255, 255, 255, 0.05) 1px, 
-                #000000 2px
-            );
-            opacity: 0.2;
-            pointer-events: none;
+            border-radius: 50%;
+            filter: blur(80px); /* Flou très prononcé */
+            opacity: 0.6;
+            animation: orbMove 15s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+        .orb.blue { background-color: #6a11cb; width: 250px; height: 250px; top: 10%; left: 10%; animation-delay: 0s; }
+        .orb.purple { background-color: #2575fc; width: 300px; height: 300px; bottom: 15%; right: 5%; animation-delay: 5s; }
+        .orb.pink { background-color: #ff007f; width: 200px; height: 200px; top: 30%; right: 20%; animation-delay: 10s; }
+        .orb.orange { background-color: #ffa500; width: 280px; height: 280px; bottom: 5%; left: 20%; animation-delay: 7s; }
+
+        @keyframes orbMove {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(20vw, 10vh) scale(1.1); }
+            66% { transform: translate(-10vw, -15vh) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- Interface Container (The Monolith) --- */
+        /* --- Interface Container (Glassmorphism Pur) --- */
         .interface-container {
             position: relative;
             width: 90%;
-            max-width: 450px;
-            /* Base Métallique et Verre */
-            background: linear-gradient(145deg, rgba(20, 20, 25, 0.95) 0%, rgba(50, 50, 55, 0.9) 100%);
-            backdrop-filter: blur(20px);
-            border: 2px solid #5a5a5a;
-            border-radius: 15px;
-            padding: 60px 40px;
-            
-            /* ILLUSION 3D */
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.08); /* Très transparent */
+            backdrop-filter: blur(25px) saturate(180%); /* Flou et saturation intenses */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 50px 35px;
             box-shadow: 
-                0 40px 100px rgba(0, 0, 0, 0.9), /* Ombre très profonde */
-                0 0 0 10px rgba(255, 255, 255, 0.05) inset; /* Bordure interne */
-            transform: rotateX(8deg) rotateY(0deg) translateZ(50px); /* Léger angle pour la 3D */
-            transform-style: preserve-3d;
-            transition: all 0.5s ease-in-out;
-            
+                0 20px 50px rgba(0, 0, 0, 0.5), /* Ombre douce */
+                0 0 0 2px rgba(255, 255, 255, 0.05) inset; /* Bordure interne subtile */
+            text-align: center;
             opacity: 0;
-            animation: slideIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation: fadeInScale 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             z-index: 1;
         }
-        /* Effet au survol pour accentuer la 3D */
-        .interface-container:hover {
-            transform: rotateX(5deg) rotateY(-2deg) translateZ(60px); 
-        }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        @keyframes slideIn { from { opacity: 0; transform: translateY(50px) rotateX(10deg) translateZ(0px); } to { opacity: 1; transform: translateY(0) rotateX(8deg) translateZ(50px); } }
-
-        /* --- Title & Subtitle (Gravé) --- */
+        /* --- Title & Subtitle --- */
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 36px;
-            letter-spacing: 8px;
-            font-weight: 900;
-            color: #d4af37; /* Or Bronze */
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #e0f2fe; /* Bleu Clair */
             margin-bottom: 5px;
-            text-shadow: 
-                0 1px 0 #9d7c2a, /* Effet gravé 3D */
-                0 2px 5px rgba(212, 175, 55, 0.8); /* Lueur de l'Or */
-            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(224, 242, 254, 0.3);
         }
         .subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            color: #b0c4de;
-            margin-bottom: 50px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        /* --- CORE VISUAL (The Crest) --- */
-        .core-visual {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 50px;
-            position: relative;
-            background: #2a2a2a;
-            border-radius: 50%;
-            border: 4px solid #d4af37; /* Bague extérieure en Or */
-            box-shadow: 0 0 10px #d4af37, inset 0 0 20px #9d7c2a;
-            /* Illusion de profondeur sur l'élément */
-            transform: translateZ(20px); 
-            transition: all 0.3s;
-        }
-        .core-visual::before {
-            content: 'E'; /* Lettre E de l'Empire */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Cinzel', serif;
-            font-size: 48px;
-            font-weight: 900;
-            color: #d4af37;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-
-        /* --- USERNAME DISPLAY (Data Feed) --- */
-        #usernameDisplay {
-            font-size: 22px;
-            font-weight: 700;
-            color: #4cd964; /* Vert pour les données vérifiées */
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            color: #a0aec0;
             margin-bottom: 40px;
-            letter-spacing: 2px;
-            min-height: 25px;
-            transition: color 0.5s;
+            font-weight: 300;
         }
 
-        /* --- Action Button (The Plunge) --- */
+        /* --- User Info Display --- */
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .user-info i {
+            margin-right: 10px;
+            color: #6366f1; /* Bleu Violet */
+            font-size: 24px;
+        }
+
+        /* --- Central Icon (Subtil) --- */
+        .central-icon {
+            margin: 0 auto 40px;
+            font-size: 60px;
+            color: #a78bfa; /* Violet doux */
+            text-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
+            animation: pulseIcon 2s infinite alternate ease-in-out;
+        }
+        @keyframes pulseIcon {
+            from { transform: scale(1); opacity: 0.8; }
+            to { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* --- Action Button (Vibrant & Clean) --- */
         .btn-action {
             width: 100%;
-            padding: 25px;
-            border-radius: 5px; /* Bord net pour le style monolithique */
+            padding: 18px;
+            border-radius: 12px;
             border: none;
-            background: linear-gradient(90deg, #d4af37 0%, #9d7c2a 100%); /* Or Mat */
-            color: #000;
-            font-weight: 900;
-            font-size: 18px;
-            letter-spacing: 2px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Dégradé Violet-Bleu */
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            /* Ombre en 3D sur le bouton */
-            box-shadow: 0 10px 0 #7e632e;
-            transform: translateZ(10px);
+            box-shadow: 0 10px 30px rgba(37, 117, 252, 0.4);
         }
         .btn-action:hover {
-            box-shadow: 0 15px 0 #7e632e;
-            transform: translateY(-5px) translateZ(15px); /* Bouton qui s'élève */
-        }
-        .btn-action:active {
-            transform: translateY(5px) translateZ(0px); /* Bouton qui s'enfonce */
-            box-shadow: 0 0px 0 #7e632e;
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(37, 117, 252, 0.6);
         }
         
         /* --- Status Message --- */
         #status-message {
-            margin-top: 40px;
-            font-size: 16px;
-            color: #8b8e96;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #cbd5e0;
             min-height: 20px;
             opacity: 1;
         }
@@ -173,17 +145,27 @@
     </style>
 </head>
 <body>
+    <div class="orb blue"></div>
+    <div class="orb purple"></div>
+    <div class="orb pink"></div>
+    <div class="orb orange"></div>
+
     <div class="interface-container">
         <h1>EMPIRE CHAIN</h1>
-        <div class="subtitle">PORTAIL D'ACCÈS DU MONOLITHE</div>
+        <div class="subtitle">PORTAIL DE SYNCHRONISATION CÉLESTE</div>
 
-        <div class="core-visual" id="crestVisual"></div>
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i> 
+            <span id="usernameDisplay">INITIALISATION DES DONNÉES...</span>
+        </div>
 
-        <div id="usernameDisplay">INITIALISATION DES SÉQUENCES...</div>
+        <div class="central-icon">
+            <i class="fas fa-satellite-dish"></i>
+        </div>
 
-        <button class="btn-action" id="saveBtn" disabled>ACTIVER PROTOCOLE D'ACCÈS</button>
+        <button class="btn-action" id="saveBtn" disabled>SYNCHRONISER ACTIFS</button>
         
-        <div id="status-message">VÉRIFICATION DU PROTOCOLE (1/3)</div>
+        <div id="status-message">VÉRIFICATION DU LIEN DE DONNÉES...</div>
     </div>
 
     <script>
@@ -197,8 +179,8 @@
         // ---------------------------------------------
         function initializeTelegram() {
             setTimeout(() => {
-                usernameDisplay.innerText = "CONNEXION SÉCURISÉE: ÉTABLIE";
-                statusMsg.innerText = "VÉRIFICATION DU PROTOCOLE (2/3)";
+                usernameDisplay.innerText = "ACCÈS SÉCURISÉ...";
+                statusMsg.innerText = "CONNEXION AU RÉSEAU EMPIRE...";
             }, 500);
 
             setTimeout(() => {
@@ -210,29 +192,30 @@
                         if (user && user.username) {
                             telegramUsername = `@${user.username}`;
                         } else if (user && user.id) {
-                             telegramUsername = `TITAN-ID-${user.id}`;
+                             telegramUsername = `UTILISATEUR-${user.id}`;
                         }
                     }
                 } catch (e) {
                     telegramUsername = "@BENICIA_ALPHA";
                 }
                 
-                usernameDisplay.innerText = `ID DE VÉRIFICATION: ${telegramUsername}`;
-                statusMsg.innerText = "CLÉ MONOLITHE OBTENUE. PRÊT À L'ACTIVATION.";
+                usernameDisplay.innerText = `IDENTIFIANT: ${telegramUsername}`;
+                statusMsg.innerText = "LIEN STABILISÉ. PRÊT À LA SYNCHRONISATION.";
                 statusMsg.style.color = "#4cd964"; 
                 saveBtn.disabled = false;
             }, 1500);
         }
 
         // ---------------------------------------------
-        // B. Logique de Démarrage (Sauvegarde des données)
+        // B. Logique de Sauvegarde (Synchronisation des Actifs)
         // ---------------------------------------------
         document.getElementById('saveBtn').addEventListener('click', async () => {
             
             statusMsg.style.opacity = 0;
-            saveBtn.innerText = "SYNCHRONISATION EN COURS...";
-            saveBtn.style.background = "linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%)";
-            saveBtn.style.boxShadow = "0 5px 0 #0d285c";
+            saveBtn.innerText = "TRAITEMENT DE LA TRANSACTION...";
+            saveBtn.style.background = "linear-gradient(135deg, #ff007f 0%, #ff5c77 100%)"; // Rose/Rouge de traitement
+            saveBtn.style.boxShadow = "0 10px 30px rgba(255, 0, 127, 0.6)";
+
 
             try {
                 const response = await fetch('/api/save_wealth', {
@@ -241,12 +224,12 @@
                     body: JSON.stringify({ 
                         userId: telegramUsername, 
                         wealth: 1000, 
-                        name: "Actif Initial de " + telegramUsername
+                        name: "Actif de " + telegramUsername 
                     })
                 });
 
                 if (response.ok) {
-                    statusMsg.innerText = "PROTOCOLE D'ACCÈS ACTIVÉ. BIENVENUE DANS L'EMPIRE.";
+                    statusMsg.innerText = "ACTIFS SYNCHRONISÉS. L'EMPIRE PROSPÈRE.";
                     statusMsg.style.color = "#4cd964"; 
                     statusMsg.style.opacity = 1;
 
@@ -254,13 +237,13 @@
                     throw new Error("Erreur Serveur: " + response.statusText);
                 }
             } catch (error) {
-                statusMsg.innerText = "ERREUR: ÉCHEC DE LA COMMANDE. RESSAYEZ.";
+                statusMsg.innerText = "ERREUR: ÉCHEC DE LA SYNCHRONISATION DES ACTIFS.";
                 statusMsg.style.color = "#ff4d4d";
                 statusMsg.style.opacity = 1;
             } finally {
-                saveBtn.innerText = "PROTOCOLE D'ACCÈS ACTIF";
-                saveBtn.style.background = "linear-gradient(90deg, #d4af37 0%, #9d7c2a 100%)";
-                saveBtn.style.boxShadow = "0 10px 0 #7e632e";
+                saveBtn.innerText = "SYNCHRONISER ACTIFS";
+                saveBtn.style.background = "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)"; // Retour au dégradé initial
+                saveBtn.style.boxShadow = "0 10px 30px rgba(37, 117, 252, 0.4)";
             }
         });
         
