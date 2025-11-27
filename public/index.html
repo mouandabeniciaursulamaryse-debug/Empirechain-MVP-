@@ -2,120 +2,216 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>EMPIRE CHAIN - Tableau de Bord Alpha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>EMPIRE CHAIN - TITAN ACCESS</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;600&display=swap');
 
-        /* 1. Styles Globaux (Nettoyage et Typographie) */
+        /* --- 1. AMBIANCE GÉNÉRALE (Luxe Sombre) --- */
         body {
-            font-family: 'Poppins', sans-serif;
             margin: 0;
+            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f172a, #1e3a8a); /* Fond Profond Alpha */
-            color: #f8fafc; /* Blanc doux */
-            padding: 20px;
-            transition: background 0.5s ease;
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 70%),
+                radial-gradient(circle at 50% 100%, #16213e 0%, transparent 70%);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow: hidden;
         }
 
-        /* 2. Le Conteneur de Luxe (Glassmorphism & Growing Effect) */
-        .card {
-            width: 90%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.08); /* Transparence subtile */
-            backdrop-filter: blur(12px); /* L'effet Verre Dépoli */
-            border: 1px solid rgba(255, 255, 255, 0.15); 
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5); /* Ombre de Profondeur */
+        /* --- 2. LA CARTE "OBSIDIAN" (Verre Noir) --- */
+        .interface-container {
+            position: relative;
+            width: 85%;
+            max-width: 380px;
+            background: rgba(10, 10, 12, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255, 215, 0, 0.05); /* Liseré Or subtil */
             text-align: center;
-            transform: scale(0.98);
-            animation: fadeIn 1s ease-out forwards;
+            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
+        /* --- 3. LE LOGO / TITRE --- */
         h1 {
-            margin: 0 0 10px;
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #38bdf8; /* Couleur d'Accent Élite */
+            font-family: 'Cinzel', serif; /* Police style Empire Romain/Luxe */
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: #fbbf24; /* Or */
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+            text-transform: uppercase;
         }
 
-        p {
-            opacity: 0.8;
-            margin-bottom: 25px;
+        .subtitle {
+            font-size: 10px;
+            color: #94a3b8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
         }
 
-        /* 3. Bouton "Growing" et Animé */
-        .btn {
+        /* --- 4. LE CŒUR DE L'EMPIRE (Animation Centrale) --- */
+        .core-loader {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #4f46e5, #0f172a);
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+            position: relative;
+            animation: pulseCore 3s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Anneaux orbitaux */
+        .core-loader::before, .core-loader::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .core-loader::before { width: 120%; height: 120%; animation: spin 10s linear infinite; border-top-color: #fbbf24; }
+        .core-loader::after { width: 150%; height: 150%; animation: spin 15s linear infinite reverse; border-bottom-color: #38bdf8; }
+
+        /* --- 5. CHAMPS DE SAISIE --- */
+        input {
             width: 100%;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px;
-            border-radius: 15px;
-            background: linear-gradient(90deg, #3b82f6, #6366f1);
-            border: none;
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            font-size: 17px;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            outline: none;
         }
-        .btn:hover {
-            transform: scale(1.03); /* Effet "Growing" */
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.8);
+        input:focus {
+            border-color: #fbbf24; /* Or au focus */
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.1);
         }
 
-        /* 4. Animation d'Apparition */
-        @keyframes fadeIn {
-            to { opacity: 1; transform: scale(1); }
+        /* --- 6. BOUTON D'ACTION --- */
+        .btn-action {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); /* Or Gradient */
+            color: #000;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
         }
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+        }
+        .btn-action:active {
+            transform: scale(0.98);
+        }
+
+        /* --- 7. MESSAGE D'ÉTAT --- */
+        #status-message {
+            margin-top: 20px;
+            font-size: 12px;
+            height: 20px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            color: #38bdf8;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseCore { 0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(79, 70, 229, 0.4); } 50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(79, 70, 229, 0.7); } }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>PORTAL ALPHA</h1>
-        <p>Gérez vos actifs et votre statut. Seule la mémoire de l'Empire est éternelle.</p>
 
-        <input type="text" id="dataInput" placeholder="Entrez le nom de votre Fief..." style="width: 90%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(0, 0, 0, 0.2); color: white;">
+    <div class="interface-container">
+        <h1>Empire Chain</h1>
+        <div class="subtitle">Connexion Sécurisée Titan</div>
 
-        <button class="btn" id="saveBtn">ENREGISTRER LA RICHESSE</button>
-        <p id="feedback" style="margin-top: 15px; font-size: 14px; color: #a5f3fc; opacity: 0; transition: opacity 0.5s;"></p>
+        <div class="core-loader" id="coreVisual"></div>
+
+        <input type="text" id="dataInput" placeholder="NOM DU FIEF" autocomplete="off">
+        <button class="btn-action" id="saveBtn">INITIALISER L'ACTIF</button>
+        
+        <div id="status-message">EN ATTENTE DE SYNCHRONISATION...</div>
     </div>
 
     <script>
         document.getElementById('saveBtn').addEventListener('click', async () => {
             const fiefName = document.getElementById('dataInput').value;
-            const feedback = document.getElementById('feedback');
+            const statusMsg = document.getElementById('status-message');
+            const core = document.getElementById('coreVisual');
+            const btn = document.getElementById('saveBtn');
 
-            feedback.style.opacity = 0; // Réinitialiser le message
-
+            // Reset UI
+            statusMsg.style.opacity = 0;
+            
             if (!fiefName) {
-                feedback.innerText = "Nom de Fief requis pour l'enregistrement.";
-                feedback.style.opacity = 1;
+                statusMsg.innerText = "ERREUR : IDENTIFIANT REQUIS";
+                statusMsg.style.color = "#ef4444"; // Rouge
+                statusMsg.style.opacity = 1;
                 return;
             }
 
-            // Envoi de données au serveur (qui va les mettre dans MongoDB)
-            const response = await fetch('/api/save_wealth', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    userId: 'TEST_USER_ALPHA', // ID de test
-                    wealth: 1000,
-                    name: fiefName
-                })
-            });
+            // UI de chargement
+            btn.innerText = "SYNCHRONISATION...";
+            btn.style.opacity = 0.7;
+            core.style.animationDuration = "0.5s"; // Accélérer l'animation
 
-            if (response.ok) {
-                feedback.innerText = '✅ Richesse sauvegardée dans la mémoire de l\'Empire !';
-                feedback.style.opacity = 1;
-            } else {
-                feedback.innerText = '❌ Échec de la connexion au Registre. Vérifiez le serveur.';
-                feedback.style.opacity = 1;
-                console.error("Erreur serveur:", await response.text());
+            try {
+                const response = await fetch('/api/save_wealth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        userId: 'TITAN_USER_01', 
+                        wealth: 50000,
+                        name: fiefName
+                    })
+                });
+
+                if (response.ok) {
+                    statusMsg.innerText = "CONNEXION ÉTABLIE. ACTIF SÉCURISÉ.";
+                    statusMsg.style.color = "#10b981"; // Vert émeraude
+                    statusMsg.style.opacity = 1;
+                    
+                    // Effet de succès visuel
+                    core.style.background = "radial-gradient(circle at 30% 30%, #10b981, #064e3b)";
+                    core.style.boxShadow = "0 0 50px #10b981";
+                } else {
+                    throw new Error("Erreur Serveur");
+                }
+            } catch (error) {
+                statusMsg.innerText = "ÉCHEC DU PROTOCOLE RÉSEAU";
+                statusMsg.style.color = "#ef4444";
+                statusMsg.style.opacity = 1;
+            } finally {
+                btn.innerText = "INITIALISER L'ACTIF";
+                btn.style.opacity = 1;
+                core.style.animationDuration = "3s"; // Retour à la normale
             }
         });
     </script>
