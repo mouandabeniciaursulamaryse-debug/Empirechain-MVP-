@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - THE SOVEREIGN</title>
+    <title>EMPIRE CHAIN - THE MONOLITH</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;600&display=swap');
 
-        /* --- Global Reset & Body (Profond) --- */
+        /* --- Global Reset & Background (Deep Void) --- */
         body {
             margin: 0;
             padding: 0;
@@ -16,118 +16,158 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #0c0d12; /* Fond Noir/Bleu très sombre */
+            background-color: #000000;
+            background-image: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
             font-family: 'Inter', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
+            /* Le champ de vision 3D est sur le body */
+            perspective: 1500px;
         }
 
-        /* --- Interface Container (Vibrancy & Autorité) --- */
+        /* --- Scanline Effect (Old-School Tech Luxe) --- */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                #000000 0, 
+                rgba(255, 255, 255, 0.05) 1px, 
+                #000000 2px
+            );
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* --- Interface Container (The Monolith) --- */
         .interface-container {
             position: relative;
             width: 90%;
-            max-width: 400px;
-            background: rgba(10, 10, 15, 0.7); /* Obscurité profonde */
-            backdrop-filter: blur(20px) brightness(120%);
-            border: 1px solid rgba(255, 215, 0, 0.2); /* Cadre Or subtil */
-            border-radius: 20px;
-            padding: 50px 30px;
+            max-width: 450px;
+            /* Base Métallique et Verre */
+            background: linear-gradient(145deg, rgba(20, 20, 25, 0.95) 0%, rgba(50, 50, 55, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid #5a5a5a;
+            border-radius: 15px;
+            padding: 60px 40px;
+            
+            /* ILLUSION 3D */
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.7), 
-                0 0 10px rgba(255, 215, 0, 0.1);
-            text-align: center;
+                0 40px 100px rgba(0, 0, 0, 0.9), /* Ombre très profonde */
+                0 0 0 10px rgba(255, 255, 255, 0.05) inset; /* Bordure interne */
+            transform: rotateX(8deg) rotateY(0deg) translateZ(50px); /* Léger angle pour la 3D */
+            transform-style: preserve-3d;
+            transition: all 0.5s ease-in-out;
+            
             opacity: 0;
-            animation: slideIn 1s ease-out forwards;
+            animation: slideIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             z-index: 1;
         }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        /* Effet au survol pour accentuer la 3D */
+        .interface-container:hover {
+            transform: rotateX(5deg) rotateY(-2deg) translateZ(60px); 
+        }
 
-        /* --- Title & Subtitle --- */
+        @keyframes slideIn { from { opacity: 0; transform: translateY(50px) rotateX(10deg) translateZ(0px); } to { opacity: 1; transform: translateY(0) rotateX(8deg) translateZ(50px); } }
+
+        /* --- Title & Subtitle (Gravé) --- */
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 32px;
-            letter-spacing: 6px;
-            font-weight: 900; /* Extra Bold */
-            color: #ffd700; /* Or Pur */
+            font-size: 36px;
+            letter-spacing: 8px;
+            font-weight: 900;
+            color: #d4af37; /* Or Bronze */
             margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            text-shadow: 
+                0 1px 0 #9d7c2a, /* Effet gravé 3D */
+                0 2px 5px rgba(212, 175, 55, 0.8); /* Lueur de l'Or */
             text-transform: uppercase;
         }
         .subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 40px;
+            font-size: 16px;
+            color: #b0c4de;
+            margin-bottom: 50px;
             font-weight: 300;
+            letter-spacing: 2px;
         }
 
-        /* --- STATIC CREST / EMBLEM --- */
-        .static-crest {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 40px;
+        /* --- CORE VISUAL (The Crest) --- */
+        .core-visual {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 50px;
             position: relative;
-            /* Simple CSS Diamond/Shield Shape */
-            transform: rotate(45deg); 
-            background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-            border: 2px solid #fff;
-            animation: none; /* AUCUNE ROTATION */
+            background: #2a2a2a;
+            border-radius: 50%;
+            border: 4px solid #d4af37; /* Bague extérieure en Or */
+            box-shadow: 0 0 10px #d4af37, inset 0 0 20px #9d7c2a;
+            /* Illusion de profondeur sur l'élément */
+            transform: translateZ(20px); 
+            transition: all 0.3s;
         }
-        .static-crest::before {
-             /* La petite croix interne, symbolisant l'ordre */
-            content: '';
+        .core-visual::before {
+            content: 'E'; /* Lettre E de l'Empire */
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 8px;
-            height: 8px;
-            background: #000;
-            border-radius: 50%;
             transform: translate(-50%, -50%);
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #d4af37;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
-        /* --- USERNAME DISPLAY (Status) --- */
+        /* --- USERNAME DISPLAY (Data Feed) --- */
         #usernameDisplay {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
-            color: #38bdf8; /* Cyan pour les données d'identification */
+            color: #4cd964; /* Vert pour les données vérifiées */
             margin-bottom: 40px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             min-height: 25px;
             transition: color 0.5s;
         }
 
-        /* --- Action Button (Financement de l'Empire) --- */
+        /* --- Action Button (The Plunge) --- */
         .btn-action {
             width: 100%;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 5px; /* Bord net pour le style monolithique */
             border: none;
-            background: linear-gradient(135deg, #ffd700 0%, #daa520 100%); /* Or Gradient */
+            background: linear-gradient(90deg, #d4af37 0%, #9d7c2a 100%); /* Or Mat */
             color: #000;
-            font-weight: 800;
-            font-size: 16px;
-            letter-spacing: 1px;
+            font-weight: 900;
+            font-size: 18px;
+            letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+            /* Ombre en 3D sur le bouton */
+            box-shadow: 0 10px 0 #7e632e;
+            transform: translateZ(10px);
         }
         .btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
+            box-shadow: 0 15px 0 #7e632e;
+            transform: translateY(-5px) translateZ(15px); /* Bouton qui s'élève */
+        }
+        .btn-action:active {
+            transform: translateY(5px) translateZ(0px); /* Bouton qui s'enfonce */
+            box-shadow: 0 0px 0 #7e632e;
         }
         
         /* --- Status Message --- */
         #status-message {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #aebfd7;
+            margin-top: 40px;
+            font-size: 16px;
+            color: #8b8e96;
             min-height: 20px;
             opacity: 1;
-            transition: color 0.5s ease;
         }
 
     </style>
@@ -135,13 +175,13 @@
 <body>
     <div class="interface-container">
         <h1>EMPIRE CHAIN</h1>
-        <div class="subtitle">PORTAIL D'ACCÈS DU SOUVERAIN</div>
+        <div class="subtitle">PORTAIL D'ACCÈS DU MONOLITHE</div>
 
-        <div class="static-crest" id="crestVisual"></div>
+        <div class="core-visual" id="crestVisual"></div>
 
-        <div id="usernameDisplay">INITIALISATION...</div>
+        <div id="usernameDisplay">INITIALISATION DES SÉQUENCES...</div>
 
-        <button class="btn-action" id="saveBtn">DÉMARRER LA SESSION</button>
+        <button class="btn-action" id="saveBtn" disabled>ACTIVER PROTOCOLE D'ACCÈS</button>
         
         <div id="status-message">VÉRIFICATION DU PROTOCOLE (1/3)</div>
     </div>
@@ -156,33 +196,32 @@
         // A. Connexion et Récupération du Nom d'Utilisateur
         // ---------------------------------------------
         function initializeTelegram() {
-            usernameDisplay.innerText = "CONNEXION SÉCURISÉE...";
-            statusMsg.innerText = "VÉRIFICATION DU PROTOCOLE (2/3)";
+            setTimeout(() => {
+                usernameDisplay.innerText = "CONNEXION SÉCURISÉE: ÉTABLIE";
+                statusMsg.innerText = "VÉRIFICATION DU PROTOCOLE (2/3)";
+            }, 500);
 
-            try {
-                if (window.Telegram && window.Telegram.WebApp) {
-                     window.Telegram.WebApp.ready();
+            setTimeout(() => {
+                try {
+                    if (window.Telegram && window.Telegram.WebApp) {
+                         window.Telegram.WebApp.ready();
 
-                    const user = window.Telegram.WebApp.initDataUnsafe.user;
-                    if (user && user.username) {
-                        telegramUsername = `@${user.username}`;
-                    } else if (user && user.id) {
-                         // Si pas de username, utiliser l'ID
-                         telegramUsername = `TITAN-ID-${user.id}`;
+                        const user = window.Telegram.WebApp.initDataUnsafe.user;
+                        if (user && user.username) {
+                            telegramUsername = `@${user.username}`;
+                        } else if (user && user.id) {
+                             telegramUsername = `TITAN-ID-${user.id}`;
+                        }
                     }
+                } catch (e) {
+                    telegramUsername = "@BENICIA_ALPHA";
                 }
-            } catch (e) {
-                // Pour le test hors de Telegram
-                console.warn("SDK Telegram non disponible. Mode de test activé.");
-                telegramUsername = "@BENICIA_ALPHA";
-            }
-            
-            // Affichage de l'utilisateur (Pas d'animation Scramble)
-            usernameDisplay.innerText = `SESSION ACTIVE: ${telegramUsername}`;
-            
-            statusMsg.innerText = "CLÉ SOUVERAINE OBTENUE. PRÊT AU LANCEMENT.";
-            statusMsg.style.color = "#10b981"; // Vert succès
-            saveBtn.disabled = false;
+                
+                usernameDisplay.innerText = `ID DE VÉRIFICATION: ${telegramUsername}`;
+                statusMsg.innerText = "CLÉ MONOLITHE OBTENUE. PRÊT À L'ACTIVATION.";
+                statusMsg.style.color = "#4cd964"; 
+                saveBtn.disabled = false;
+            }, 1500);
         }
 
         // ---------------------------------------------
@@ -192,7 +231,8 @@
             
             statusMsg.style.opacity = 0;
             saveBtn.innerText = "SYNCHRONISATION EN COURS...";
-            saveBtn.style.background = "linear-gradient(135deg, #1e3a8a, #3b82f6)"; /* Bleu de travail */
+            saveBtn.style.background = "linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%)";
+            saveBtn.style.boxShadow = "0 5px 0 #0d285c";
 
             try {
                 const response = await fetch('/api/save_wealth', {
@@ -206,20 +246,21 @@
                 });
 
                 if (response.ok) {
-                    statusMsg.innerText = "INITIATION RÉUSSIE. L'EMPIRE VOUS ATTEND.";
-                    statusMsg.style.color = "#10b981"; 
+                    statusMsg.innerText = "PROTOCOLE D'ACCÈS ACTIVÉ. BIENVENUE DANS L'EMPIRE.";
+                    statusMsg.style.color = "#4cd964"; 
                     statusMsg.style.opacity = 1;
 
                 } else {
                     throw new Error("Erreur Serveur: " + response.statusText);
                 }
             } catch (error) {
-                statusMsg.innerText = "ERREUR: ÉCHEC DE L'INITIATION DES ACTIFS.";
+                statusMsg.innerText = "ERREUR: ÉCHEC DE LA COMMANDE. RESSAYEZ.";
                 statusMsg.style.color = "#ff4d4d";
                 statusMsg.style.opacity = 1;
             } finally {
-                saveBtn.innerText = "SESSION DÉMARRÉE";
-                saveBtn.style.background = "linear-gradient(135deg, #ffd700 0%, #daa520 100%)"; /* Retour Or */
+                saveBtn.innerText = "PROTOCOLE D'ACCÈS ACTIF";
+                saveBtn.style.background = "linear-gradient(90deg, #d4af37 0%, #9d7c2a 100%)";
+                saveBtn.style.boxShadow = "0 10px 0 #7e632e";
             }
         });
         
@@ -228,4 +269,3 @@
     </script>
 </body>
 </html>
- 
