@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>EMPIRE CHAIN - LUMINOUS CORE</title>
+    <title>EMPIRE CHAIN - ABYSSAL GLOW</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
 
-        /* --- Global Reset & Body (Vibrant) --- */
+        /* --- Global Reset & Body (ABYSSAL DARK) --- */
         body {
             margin: 0;
             padding: 0;
@@ -17,159 +17,119 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #120822; /* Fond Violet Très Profond */
+            background-color: #000000; /* Noir Absolu */
+            background-image: radial-gradient(circle at 50% 50%, #150525 0%, #000000 100%);
             font-family: 'Inter', sans-serif;
             color: white;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- Dynamic Orb Background (More subtle glow) --- */
+        /* --- Dynamic Orb Background (Très Flou, Fort Contraste) --- */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px); 
-            opacity: 0.7;
-            animation: orbMove 20s infinite alternate ease-in-out; /* Mouvement plus lent */
+            filter: blur(120px); /* Encore plus flou */
+            opacity: 0.8;
+            animation: orbMove 20s infinite alternate ease-in-out; 
             z-index: -1;
         }
-        .orb.blue { background-color: #6a11cb; width: 280px; height: 280px; top: 15%; left: 15%; animation-delay: 0s; }
-        .orb.purple { background-color: #2575fc; width: 330px; height: 330px; bottom: 20%; right: 10%; animation-delay: 5s; }
-        .orb.pink { background-color: #ff007f; width: 220px; height: 220px; top: 35%; right: 25%; animation-delay: 10s; }
+        .orb.blue { background-color: #00bcd4; width: 300px; height: 300px; top: 10%; left: 10%; animation-delay: 0s; } /* Cyan Vif */
+        .orb.purple { background-color: #9c27b0; width: 350px; height: 350px; bottom: 15%; right: 5%; animation-delay: 5s; } /* Violet Vif */
+        .orb.pink { background-color: #ff4081; width: 250px; height: 250px; top: 30%; right: 20%; animation-delay: 10s; } /* Rose/Magenta Vif */
 
         @keyframes orbMove {
             0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(10vw, 10vh) scale(1.1); }
+            50% { transform: translate(15vw, 15vh) scale(1.1); }
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- Interface Container (Glassmorphism + Energy Field) --- */
+        /* --- Interface Container (Glassmorphism + Bordure Glow) --- */
         .interface-container {
             position: relative;
             width: 90%;
-            max-width: 350px; /* Compact et élégant */
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(30px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            max-width: 350px; 
+            /* Moins transparent que V8 pour une meilleure visibilité */
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(35px) saturate(200%); /* Flou intense */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure plus visible */
             border-radius: 25px;
             padding: 50px 30px;
             box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.6), 
-                0 0 40px rgba(106, 17, 203, 0.3); /* Vague de lumière violette */
+                0 30px 80px rgba(0, 0, 0, 0.8), 
+                0 0 50px rgba(106, 17, 203, 0.4); 
             text-align: center;
             opacity: 0;
             animation: fadeInScale 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             z-index: 1;
-            /* Animation de bordure subtile */
-            border-image-source: linear-gradient(45deg, #6a11cb, #2575fc);
-            border-image-slice: 1;
-            animation: pulseBorder 10s infinite linear;
-        }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        /* Bordure animée pour simuler l'énergie */
-        @keyframes pulseBorder {
-            0% { border-image-source: linear-gradient(45deg, #6a11cb, #2575fc); }
-            50% { border-image-source: linear-gradient(45deg, #ff007f, #6a11cb); }
-            100% { border-image-source: linear-gradient(45deg, #6a11cb, #2575fc); }
         }
 
         /* --- Title & Subtitle (MAX GLOW) --- */
         h1 {
             font-family: 'Inter', sans-serif;
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 900;
-            color: #e0f2fe; 
+            color: #ffffff; 
             margin-bottom: 5px;
             letter-spacing: 2px;
+            /* Glow très fort pour le titre */
             text-shadow: 
-                0 0 10px rgba(224, 242, 254, 0.5), /* Glow principal */
-                0 0 20px rgba(224, 242, 254, 0.3);
+                0 0 15px rgba(255, 255, 255, 0.7),
+                0 0 30px rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
-            /* Animation de texte subtile (Glitch/Scanline) */
-            animation: textGlow 2s infinite alternate;
-        }
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(224, 242, 254, 0.5); }
-            50% { text-shadow: 0 0 15px rgba(255, 0, 127, 0.7); } /* Changement de couleur au milieu */
-            100% { text-shadow: 0 0 10px rgba(224, 242, 254, 0.5); }
-        }
-
-        .subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: #a0aec0;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        /* --- User Info Display --- */
-        .user-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .user-info i {
-            margin-right: 10px;
-            color: #ff007f; /* Rose Vif */
-            font-size: 20px;
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8);
         }
 
         /* --- Central Icon (Pulsation MAX) --- */
         .central-icon {
             margin: 0 auto 40px;
             font-size: 70px;
-            color: #6a11cb;
+            color: #00bcd4; /* Cyan pour le contraste */
             text-shadow: 
-                0 0 20px #6a11cb, /* Glow primaire */
-                0 0 40px #2575fc; /* Glow secondaire */
+                0 0 20px #00bcd4, 
+                0 0 40px #9c27b0; 
             animation: pulseIcon 1.5s infinite alternate ease-in-out;
         }
-        @keyframes pulseIcon {
-            from { transform: scale(1); opacity: 0.8; }
-            to { transform: scale(1.1); opacity: 1; }
-        }
 
-        /* --- Action Button (3D Press Effect + Glow) --- */
+        /* --- Action Button (SPECTACULAR GLOW) --- */
         .btn-action {
             width: 100%;
             padding: 20px;
             border-radius: 15px;
             border: none;
-            background: linear-gradient(135deg, #ff007f 0%, #ff5c77 100%); /* Dégradé Rose/Magenta */
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
+            background: linear-gradient(135deg, #ff4081 0%, #ff80ab 100%); /* Rose Vif */
+            color: #000000; /* Texte Noir sur Bouton Lumineux */
+            font-weight: 900;
+            font-size: 17px;
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-            /* Effet 3D léger */
-            box-shadow: 0 10px 20px rgba(255, 0, 127, 0.5);
+            /* Box-shadow initiale légère */
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+            text-transform: uppercase;
         }
+
+        /* Effet Glow TRÈS Fort au survol/clic */
         .btn-action:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 0, 127, 0.8);
+            transform: translateY(-3px);
+            /* Glow intense, très visible */
+            box-shadow: 
+                0 0 5px #ff4081, 
+                0 0 20px #ff4081, 
+                0 0 40px #ff4081, 
+                0 0 80px rgba(255, 64, 129, 0.8); 
         }
         .btn-action:active {
-            transform: translateY(2px);
-            box-shadow: 0 5px 10px rgba(255, 0, 127, 0.5);
+            transform: translateY(1px);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
         }
         
-        /* --- Status Message --- */
-        #status-message {
-            margin-top: 30px;
-            font-size: 15px;
-            color: #cbd5e0;
-            min-height: 20px;
-            opacity: 1;
-            /* Lueur sur le message de statut */
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-        }
+        /* --- Autres styles (inchangés mais inclus pour la refonte totale) --- */
+        .subtitle { font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aec0; margin-bottom: 40px; font-weight: 300; }
+        .user-info { display: flex; align-items: center; justify-content: center; margin-bottom: 30px; color: #ffffff; font-size: 16px; font-weight: 600; letter-spacing: 0.5px; }
+        .user-info i { margin-right: 10px; color: #9c27b0; font-size: 20px; text-shadow: 0 0 10px rgba(156, 39, 176, 0.8); }
+        #status-message { margin-top: 30px; font-size: 15px; color: #cbd5e0; min-height: 20px; opacity: 1; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes pulseIcon { from { transform: scale(1); opacity: 0.8; } to { transform: scale(1.1); opacity: 1; } }
 
     </style>
 </head>
@@ -241,7 +201,7 @@
             
             statusMsg.style.opacity = 0;
             saveBtn.innerText = "TRAITEMENT DE LA TRANSACTION...";
-            saveBtn.style.background = "linear-gradient(135deg, #4cd964 0%, #32cd32 100%)"; // Vert pour l'action
+            saveBtn.style.background = "linear-gradient(135deg, #4cd964 0%, #32cd32 100%)";
             saveBtn.style.boxShadow = "0 10px 30px rgba(76, 217, 100, 0.6)";
 
             try {
@@ -269,8 +229,8 @@
                 statusMsg.style.opacity = 1;
             } finally {
                 saveBtn.innerText = "SYNCHRONISER ACTIFS";
-                saveBtn.style.background = "linear-gradient(135deg, #ff007f 0%, #ff5c77 100%)"; 
-                saveBtn.style.boxShadow = "0 10px 30px rgba(255, 0, 127, 0.4)";
+                saveBtn.style.background = "linear-gradient(135deg, #ff4081 0%, #ff80ab 100%)";
+                saveBtn.style.boxShadow = "0 5px 15px rgba(255, 64, 129, 0.4)";
             }
         });
         
