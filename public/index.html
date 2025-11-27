@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>EMPIRE CHAIN - Tableau de Bord Alpha</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap');
+
+        /* 1. Styles Globaux (Nettoyage et Typographie) */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a); /* Fond Profond Alpha */
+            color: #f8fafc; /* Blanc doux */
+            padding: 20px;
+            transition: background 0.5s ease;
+        }
+
+        /* 2. Le Conteneur de Luxe (Glassmorphism & Growing Effect) */
+        .card {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.08); /* Transparence subtile */
+            backdrop-filter: blur(12px); /* L'effet Verre Dépoli */
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5); /* Ombre de Profondeur */
+            text-align: center;
+            transform: scale(0.98);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #38bdf8; /* Couleur d'Accent Élite */
+        }
+
+        p {
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        /* 3. Bouton "Growing" et Animé */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            font-size: 17px;
+        }
+        .btn:hover {
+            transform: scale(1.03); /* Effet "Growing" */
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.8);
+        }
+
+        /* 4. Animation d'Apparition */
+        @keyframes fadeIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>PORTAL ALPHA</h1>
+        <p>Gérez vos actifs et votre statut. Seule la mémoire de l'Empire est éternelle.</p>
+
+        <input type="text" id="dataInput" placeholder="Entrez le nom de votre Fief..." style="width: 90%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(0, 0, 0, 0.2); color: white;">
+
+        <button class="btn" id="saveBtn">ENREGISTRER LA RICHESSE</button>
+        <p id="feedback" style="margin-top: 15px; font-size: 14px; color: #a5f3fc; opacity: 0; transition: opacity 0.5s;"></p>
+    </div>
+
+    <script>
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            const fiefName = document.getElementById('dataInput').value;
+            const feedback = document.getElementById('feedback');
+
+            feedback.style.opacity = 0; // Réinitialiser le message
+
+            if (!fiefName) {
+                feedback.innerText = "Nom de Fief requis pour l'enregistrement.";
+                feedback.style.opacity = 1;
+                return;
+            }
+
+            // Envoi de données au serveur (qui va les mettre dans MongoDB)
+            const response = await fetch('/api/save_wealth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    userId: 'TEST_USER_ALPHA', // ID de test
+                    wealth: 1000,
+                    name: fiefName
+                })
+            });
+
+            if (response.ok) {
+                feedback.innerText = '✅ Richesse sauvegardée dans la mémoire de l\'Empire !';
+                feedback.style.opacity = 1;
+            } else {
+                feedback.innerText = '❌ Échec de la connexion au Registre. Vérifiez le serveur.';
+                feedback.style.opacity = 1;
+                console.error("Erreur serveur:", await response.text());
+            }
+        });
+    </script>
+</body>
+</html>
