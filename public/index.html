@@ -169,7 +169,7 @@
             margin-top: 5px;
         }
         
-        /* --- Market Grid Styling (9 Branches) --- */
+        /* --- Market Grid Styling (Branches simplifiées) --- */
         .market-branches {
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
@@ -215,7 +215,7 @@
             background: rgba(255, 255, 255, 0.1);
         }
         
-        /* --- Sous-vues et Cartes Produit (Packs Diamonds) --- */
+        /* --- Sous-vues et Cartes Produit (Général) --- */
         .market-sub-view {
             width: 100%;
             display: none;
@@ -247,8 +247,8 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             padding: 10px 0;
-            width: 95%; /* Ajout pour l'alignement */
-            margin: 0 auto; /* Centrage */
+            width: 95%; 
+            margin: 0 auto; 
         }
 
         /* Style de la carte produit (Glassmorphism Sombre) */
@@ -263,6 +263,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             text-align: center;
+            position: relative;
         }
         .product-icon {
             font-size: 40px;
@@ -283,7 +284,7 @@
         .product-price {
             font-size: 14px;
             font-weight: 900;
-            color: #FFD700; /* Or/Jaune pour le prix Star */
+            color: #FFD700; 
             margin: 10px 0;
             display: flex;
             align-items: center;
@@ -307,6 +308,31 @@
         .buy-button:active {
             transform: scale(0.98);
         }
+        
+        /* Sous-catégories Véhicules */
+        .vehicle-section {
+            width: 100%;
+            padding: 10px 0;
+        }
+        .vehicle-section h5 {
+            font-size: 16px;
+            color: #ffc107;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 193, 7, 0.2);
+            padding-bottom: 5px;
+            margin: 20px 0 15px;
+        }
+        /* Style pour les prix en cash et or */
+        .price-cash {
+            color: #4CAF50;
+        }
+        .price-diamonds {
+            color: #00bcd4;
+        }
+        .price-stars {
+            color: #FFD700;
+        }
+
 
         /* --- C. FOOTER (Barre de navigation) --- */
         .nav-bar {
@@ -372,37 +398,13 @@
             </div>
             
             <div class="market-branches">
-                <div class="market-branch-item" data-branch="featured">
-                    <i class="fas fa-star" style="color: #FFD700;"></i>
-                    <span>Featured</span>
-                </div>
                 <div class="market-branch-item" data-branch="diamonds">
                     <i class="fas fa-gem" style="color: #00bcd4;"></i>
-                    <span>Diamonds</span>
+                    <span>Packs Premium</span>
                 </div>
-                <div class="market-branch-item" data-branch="vehicles">
+                <div class="market-branch-item active-branch" data-branch="vehicles">
                     <i class="fas fa-car-side" style="color: #fc466b;"></i>
                     <span>Véhicules</span>
-                </div>
-                <div class="market-branch-item" data-branch="properties">
-                    <i class="fas fa-home" style="color: #4CAF50;"></i>
-                    <span>Propriétés</span>
-                </div>
-                <div class="market-branch-item" data-branch="skins">
-                    <i class="fas fa-tshirt" style="color: #6a11cb;"></i>
-                    <span>Skins & Anim.</span>
-                </div>
-                <div class="market-branch-item" data-branch="boosters">
-                    <i class="fas fa-bolt" style="color: #ffc107;"></i>
-                    <span>Boosters</span>
-                </div>
-                <div class="market-branch-item" data-branch="business">
-                    <i class="fas fa-city" style="color: #8e2de2;"></i>
-                    <span>Industries</span>
-                </div>
-                <div class="market-branch-item" data-branch="resources">
-                    <i class="fas fa-cube" style="color: #90a4ae;"></i>
-                    <span>Ressources</span>
                 </div>
                 <div class="market-branch-item" data-branch="sell">
                     <i class="fas fa-tag" style="color: #b0dfff;"></i>
@@ -410,56 +412,132 @@
                 </div>
             </div>
 
-            <div class="market-sub-view active-sub-view" id="sub-view-diamonds">
+            <div class="market-sub-view" id="sub-view-diamonds">
                 <div class="sub-view-header">
                     <h4>💎 Packs Diamonds & Ressources</h4>
                     <p>Monnaie premium du jeu. Payez en Stars ou TON.</p>
                 </div>
-
                 <div class="product-grid">
                     <div class="product-card">
                         <div class="product-icon"><i class="fas fa-box" style="color: #6a11cb;"></i></div>
                         <span class="product-name">Pack Starter</span>
-                        <div class="product-details">
-                            +10k Cash +50 Diamants
-                        </div>
-                        <div class="product-price">120 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <div class="product-details">+10k Cash +50 Diamants</div>
+                        <div class="product-price price-stars">120 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
                         <button class="buy-button">Acheter</button>
                     </div>
-
                     <div class="product-card">
                         <div class="product-icon"><i class="fas fa-gem" style="color: #00bcd4;"></i></div>
                         <span class="product-name">Pack Pro</span>
-                        <div class="product-details">
-                            +100k Cash +200 Diamants +50 Or
-                        </div>
-                        <div class="product-price">350 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <div class="product-details">+100k Cash +200 Diamants +50 Or</div>
+                        <div class="product-price price-stars">350 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
                         <button class="buy-button">Acheter</button>
                     </div>
-                    
                     <div class="product-card">
                         <div class="product-icon"><i class="fas fa-crown" style="color: #ffc107;"></i></div>
                         <span class="product-name">Pack Titan</span>
-                        <div class="product-details">
-                            +500k Cash +500 Diamants +150 Or
-                        </div>
-                        <div class="product-price">900 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <div class="product-details">+500k Cash +500 Diamants +150 Or</div>
+                        <div class="product-price price-stars">900 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
                         <button class="buy-button">Acheter</button>
                     </div>
-                    
                     <div class="product-card">
                         <div class="product-icon"><i class="fas fa-globe" style="color: #ff4d4d;"></i></div>
                         <span class="product-name">Pack Empire</span>
-                        <div class="product-details">
-                            +1M Cash +1200 Diamants +300 Or
-                        </div>
-                        <div class="product-price">1800 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <div class="product-details">+1M Cash +1200 Diamants +300 Or</div>
+                        <div class="product-price price-stars">1800 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
                         <button class="buy-button">Acheter</button>
                     </div>
                 </div>
             </div>
 
+            <div class="market-sub-view active-sub-view" id="sub-view-vehicles">
+                <div class="sub-view-header">
+                    <h4>🚗 Flotte & Prestige</h4>
+                    <p>Choisissez votre niveau : Premium (Stars), Élite (Diamants), ou Standard (Cash).</p>
+                </div>
+
+                <div class="vehicle-section">
+                    <h5>✨ PREMIUM - Stars</h5>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-paper-plane" style="color: #b0dfff;"></i></div>
+                            <span class="product-name">AeroTitan V9</span>
+                            <div class="product-details">Jet classe royale. Ultra-rapide.</div>
+                            <div class="product-price price-stars">1,900 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-ship" style="color: #00bcd4;"></i></div>
+                            <span class="product-name">Titan Wave R</span>
+                            <div class="product-details">Yacht de luxe. Prestige.</div>
+                            <div class="product-price price-stars">2,800 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car" style="color: #fc466b;"></i></div>
+                            <span class="product-name">Emperor SX</span>
+                            <div class="product-details">Hypercar ultime. Vitesse max.</div>
+                            <div class="product-price price-stars">2,400 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-helicopter" style="color: #ffc107;"></i></div>
+                            <span class="product-name">RoyalCopter LX</span>
+                            <div class="product-details">Hélicoptère blindé VIP.</div>
+                            <div class="product-price price-stars">2,200 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vehicle-section">
+                    <h5>💎 ÉLITE - Diamants</h5>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car-side" style="color: #00bcd4;"></i></div>
+                            <span class="product-name">Shadow Runner</span>
+                            <div class="product-details">Voiture de sport modifiée.</div>
+                            <div class="product-price price-diamonds">950 <i class="fas fa-gem"></i> Diamants</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                         <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-motorcycle" style="color: #ff4d4d;"></i></div>
+                            <span class="product-name">ThunderBlade</span>
+                            <div class="product-details">Moto haute performance.</div>
+                            <div class="product-price price-diamonds">700 <i class="fas fa-gem"></i> Diamants</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vehicle-section">
+                    <h5>💰 STANDARD - Cash & Or</h5>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car" style="color: #4CAF50;"></i></div>
+                            <span class="product-name">Roadster 200</span>
+                            <div class="product-details">Voiture simple. Bon début.</div>
+                            <div class="product-price price-cash">15,000 <i class="fas fa-coins"></i> Cash</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-truck-pickup" style="color: #90a4ae;"></i></div>
+                            <span class="product-name">Mammoth 4x4</span>
+                            <div class="product-details">SUV robuste pour le désert.</div>
+                            <div class="product-price price-cash">40,000 <i class="fas fa-coins"></i> Cash + 10 <i class="fas fa-medal"></i> Or</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div class="market-sub-view" id="sub-view-sell">
+                <div class="sub-view-header">
+                    <h4>🪙 Vendre des Actifs</h4>
+                    <p>Vente automatique instantanée de vos biens contre du Cash, des Diamants et de l'Or.</p>
+                </div>
+            </div>
+            
+        </div>
 
         <div class="view" id="social-view">
             <div class="market-header">
@@ -513,6 +591,7 @@
         const tapZone = document.querySelector('.tap-zone');
         const navItems = document.querySelectorAll('.nav-item');
         const views = document.querySelectorAll('.view');
+        const marketSubViews = document.querySelectorAll('.market-sub-view');
         let currentScore = 1250;
         let tapValue = 1;
 
@@ -554,9 +633,8 @@
             createFloatingScore(clickX, clickY, tapValue);
         });
 
-        // --- Logique de Navigation ---
+        // --- Logique de Navigation Principale ---
         function switchView(targetId) {
-            // 1. Cacher toutes les vues et désactiver tous les boutons
             views.forEach(view => {
                 view.classList.remove('active-view');
             });
@@ -564,21 +642,18 @@
                 item.classList.remove('active');
             });
 
-            // 2. Afficher la vue cible et activer le bouton correspondant
             document.getElementById(targetId).classList.add('active-view');
             document.getElementById('nav-' + targetId.replace('-view', '')).classList.add('active');
             
-            // Logique pour afficher la sous-vue Market par défaut lors de l'accès à 'market-view'
             if (targetId === 'market-view') {
-                 // Nous forçons l'affichage de la sous-vue 'diamonds' par défaut pour le moment
-                 document.getElementById('sub-view-diamonds').classList.add('active-sub-view');
+                 // Active la vue 'vehicles' par défaut quand on accède au Market
+                 switchMarketSubView('sub-view-vehicles');
             } else {
-                 // Cacher les sous-vues quand on quitte le Market
-                 document.getElementById('sub-view-diamonds').classList.remove('active-sub-view');
+                 // Désactive les sous-vues du Market quand on quitte
+                 marketSubViews.forEach(subView => subView.classList.remove('active-sub-view'));
             }
         }
 
-        // 3. Ajouter les écouteurs d'événements à la barre de navigation
         navItems.forEach(item => {
             item.addEventListener('click', () => {
                 const viewName = item.id.replace('nav-', '') + '-view';
@@ -588,21 +663,31 @@
         
         // --- Logique de Navigation Market (Branches) ---
         const marketBranches = document.querySelectorAll('.market-branch-item');
+        
+        function switchMarketSubView(targetId) {
+            // Désactive toutes les sous-vues du market
+            marketSubViews.forEach(subView => {
+                subView.classList.remove('active-sub-view');
+            });
+            // Active la sous-vue cible
+            const subViewElement = document.getElementById(targetId);
+            if (subViewElement) {
+                subViewElement.classList.add('active-sub-view');
+            }
+            
+            // Met à jour le statut 'active' des boutons de la branche
+            marketBranches.forEach(branch => {
+                branch.classList.remove('active-branch');
+                if ('sub-view-' + branch.dataset.branch === targetId) {
+                    branch.classList.add('active-branch');
+                }
+            });
+        }
 
         marketBranches.forEach(branch => {
             branch.addEventListener('click', () => {
                 const targetSubView = 'sub-view-' + branch.dataset.branch;
-                
-                // Cacher toutes les sous-vues (si nous en ajoutons plus)
-                document.querySelectorAll('.market-sub-view').forEach(subView => {
-                    subView.classList.remove('active-sub-view');
-                });
-                
-                // Afficher la sous-vue cible (si elle existe)
-                const subViewElement = document.getElementById(targetSubView);
-                if (subViewElement) {
-                    subViewElement.classList.add('active-sub-view');
-                }
+                switchMarketSubView(targetSubView);
             });
         });
 
