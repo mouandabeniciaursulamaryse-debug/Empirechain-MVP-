@@ -172,7 +172,7 @@
         /* --- Market Grid Styling (9 Branches) --- */
         .market-branches {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 colonnes de taille égale */
+            grid-template-columns: repeat(3, 1fr); 
             gap: 10px;
             width: 95%;
             max-width: 500px;
@@ -186,7 +186,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            aspect-ratio: 1 / 1; /* Force le ratio carré */
+            aspect-ratio: 1 / 1; 
             
             /* Style Glassmorphism Sombre */
             background: rgba(255, 255, 255, 0.05); 
@@ -213,6 +213,99 @@
         }
         .market-branch-item:hover {
             background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* --- Sous-vues et Cartes Produit (Packs Diamonds) --- */
+        .market-sub-view {
+            width: 100%;
+            display: none;
+            padding: 0 10px;
+            box-sizing: border-box;
+            max-width: 520px;
+        }
+        .market-sub-view.active-sub-view {
+            display: block;
+        }
+        .sub-view-header {
+            text-align: center;
+            padding: 15px 0 10px;
+        }
+        .sub-view-header h4 {
+            font-size: 18px;
+            color: #b0dfff;
+            margin: 0;
+        }
+        .sub-view-header p {
+            font-size: 12px;
+            color: #a0aec0;
+            margin-top: 5px;
+        }
+        
+        /* Grille des produits (2 colonnes) */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 10px 0;
+            width: 95%; /* Ajout pour l'alignement */
+            margin: 0 auto; /* Centrage */
+        }
+
+        /* Style de la carte produit (Glassmorphism Sombre) */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .product-icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+        .product-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #e0f2fe;
+            margin-bottom: 5px;
+        }
+        .product-details {
+            font-size: 10px;
+            color: #a0aec0;
+            min-height: 24px; 
+            line-height: 1.2;
+        }
+        .product-price {
+            font-size: 14px;
+            font-weight: 900;
+            color: #FFD700; /* Or/Jaune pour le prix Star */
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .product-price i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .buy-button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            width: 90%;
+            box-shadow: 0 2px 10px rgba(106, 17, 203, 0.5);
+        }
+        .buy-button:active {
+            transform: scale(0.98);
         }
 
         /* --- C. FOOTER (Barre de navigation) --- */
@@ -316,7 +409,57 @@
                     <span>Vendre</span>
                 </div>
             </div>
-        </div>
+
+            <div class="market-sub-view active-sub-view" id="sub-view-diamonds">
+                <div class="sub-view-header">
+                    <h4>💎 Packs Diamonds & Ressources</h4>
+                    <p>Monnaie premium du jeu. Payez en Stars ou TON.</p>
+                </div>
+
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fas fa-box" style="color: #6a11cb;"></i></div>
+                        <span class="product-name">Pack Starter</span>
+                        <div class="product-details">
+                            +10k Cash +50 Diamants
+                        </div>
+                        <div class="product-price">120 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <button class="buy-button">Acheter</button>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fas fa-gem" style="color: #00bcd4;"></i></div>
+                        <span class="product-name">Pack Pro</span>
+                        <div class="product-details">
+                            +100k Cash +200 Diamants +50 Or
+                        </div>
+                        <div class="product-price">350 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <button class="buy-button">Acheter</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fas fa-crown" style="color: #ffc107;"></i></div>
+                        <span class="product-name">Pack Titan</span>
+                        <div class="product-details">
+                            +500k Cash +500 Diamants +150 Or
+                        </div>
+                        <div class="product-price">900 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <button class="buy-button">Acheter</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fas fa-globe" style="color: #ff4d4d;"></i></div>
+                        <span class="product-name">Pack Empire</span>
+                        <div class="product-details">
+                            +1M Cash +1200 Diamants +300 Or
+                        </div>
+                        <div class="product-price">1800 <i class="fas fa-star" style="color:#fcd53f;"></i> Stars</div>
+                        <button class="buy-button">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            </div>
 
         <div class="view" id="social-view">
             <div class="market-header">
@@ -379,7 +522,7 @@
             window.Telegram.WebApp.expand();
         }
 
-        // --- Logique de Score ---
+        // --- Logique de Score (Tapping) ---
         function updateScore(amount) {
             currentScore += amount;
             scoreDisplay.textContent = currentScore.toLocaleString(); 
@@ -390,7 +533,6 @@
             scoreElement.classList.add('floating-score');
             scoreElement.textContent = `+${amount}`;
             
-            // Positionnement relatif à la Tap Zone
             const tapZoneRect = tapZone.getBoundingClientRect();
             scoreElement.style.left = `${x}px`;
             scoreElement.style.top = `${y}px`;
@@ -405,7 +547,6 @@
         tapButton.addEventListener('click', (event) => {
             updateScore(tapValue);
             
-            // Calcule la position du clic relative à la zone de tapping
             const tapZoneRect = tapZone.getBoundingClientRect();
             const clickX = event.clientX - tapZoneRect.left;
             const clickY = event.clientY - tapZoneRect.top;
@@ -426,6 +567,15 @@
             // 2. Afficher la vue cible et activer le bouton correspondant
             document.getElementById(targetId).classList.add('active-view');
             document.getElementById('nav-' + targetId.replace('-view', '')).classList.add('active');
+            
+            // Logique pour afficher la sous-vue Market par défaut lors de l'accès à 'market-view'
+            if (targetId === 'market-view') {
+                 // Nous forçons l'affichage de la sous-vue 'diamonds' par défaut pour le moment
+                 document.getElementById('sub-view-diamonds').classList.add('active-sub-view');
+            } else {
+                 // Cacher les sous-vues quand on quitte le Market
+                 document.getElementById('sub-view-diamonds').classList.remove('active-sub-view');
+            }
         }
 
         // 3. Ajouter les écouteurs d'événements à la barre de navigation
@@ -435,6 +585,27 @@
                 switchView(viewName);
             });
         });
+        
+        // --- Logique de Navigation Market (Branches) ---
+        const marketBranches = document.querySelectorAll('.market-branch-item');
+
+        marketBranches.forEach(branch => {
+            branch.addEventListener('click', () => {
+                const targetSubView = 'sub-view-' + branch.dataset.branch;
+                
+                // Cacher toutes les sous-vues (si nous en ajoutons plus)
+                document.querySelectorAll('.market-sub-view').forEach(subView => {
+                    subView.classList.remove('active-sub-view');
+                });
+                
+                // Afficher la sous-vue cible (si elle existe)
+                const subViewElement = document.getElementById(targetSubView);
+                if (subViewElement) {
+                    subViewElement.classList.add('active-sub-view');
+                }
+            });
+        });
+
 
     </script>
 </body>
