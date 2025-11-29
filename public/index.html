@@ -242,7 +242,7 @@
             margin-top: 5px;
         }
         
-        /* Grille des Packs Diamonds (2 colonnes) */
+        /* Grille des produits (2 colonnes) */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -252,7 +252,7 @@
             margin: 0 auto; 
         }
 
-        /* Style des Cartes Packs (Glassmorphism Sombre) */
+        /* Style de la carte produit (Glassmorphism Sombre) */
         .product-card {
             display: flex;
             flex-direction: column;
@@ -264,6 +264,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             text-align: center;
+            min-height: 180px; /* Assure une hauteur minimale */
         }
         .product-icon {
             font-size: 40px;
@@ -288,6 +289,8 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            flex-wrap: wrap; /* Gère les prix multiples (Cash + Or) */
+            justify-content: center;
         }
         .product-price i {
             font-size: 12px;
@@ -308,56 +311,22 @@
             transform: scale(0.98);
         }
         
-        /* Sous-catégories Véhicules (Liste Verticale) */
+        /* Sous-catégories Véhicules (Titres) */
         .vehicle-section {
             width: 100%;
             padding: 10px 0;
         }
         .vehicle-section h5 {
             font-size: 16px;
-            color: #ffc107;
-            text-align: left;
+            color: #e0f2fe; /* Couleur claire */
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 5px;
             margin: 20px 10px 15px;
-        }
-        .item-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 95%;
-            margin: 0 auto;
-        }
-        .list-item-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            border-left: 3px solid #ffc107; /* Bande pour le style */
-        }
-        .item-details {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .item-name {
-            font-size: 14px;
-            font-weight: 600;
-        }
-        .item-price-display {
-            font-size: 12px;
+            text-transform: uppercase;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 3px;
         }
-        .list-item-card button {
-            padding: 6px 15px;
-            font-size: 11px;
-            border-radius: 6px;
-        }
+
 
         /* Couleurs des monnaies */
         .price-cash { color: #4CAF50; }
@@ -450,7 +419,7 @@
 
             <div class="market-sub-view" id="sub-view-diamonds">
                 <div class="sub-view-header">
-                    <h4>💎 Packs Diamonds & Ressources</h4>
+                    <h4>Packs Diamonds & Ressources</h4>
                     <p>Monnaie premium du jeu. Payez en Stars ou TON.</p>
                 </div>
                 <div class="product-grid">
@@ -486,351 +455,108 @@
             </div>
 
             <div class="market-sub-view active-sub-view" id="sub-view-vehicles">
-                <div class="sub-view-header">
-                    <h4>🚗 Flotte & Prestige</h4>
-                    <p>Choisissez votre niveau : Premium (Stars), Diamants (Élite), Or (Prestige) ou Cash (Standard).</p>
-                </div>
 
                 <div class="vehicle-section">
-                    <h5>✨ PREMIUM - Jets & Yachts (Stars)</h5>
-                    <div class="item-list">
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">SkyKnight X1</span>
-                                <div class="item-price-display price-stars">1,200 <i class="fas fa-star"></i></div>
-                            </div>
+                    <h5>PREMIUM - STARS</h5>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-plane-departure" style="color: #b0dfff;"></i></div>
+                            <span class="product-name">Imperial Falcon</span>
+                            <div class="product-details">Jet de luxe avec intérieur diamant.</div>
+                            <div class="product-price price-stars">3,500 <i class="fas fa-star"></i> Stars</div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">AeroTitan V9</span>
-                                <div class="item-price-display price-stars">1,900 <i class="fas fa-star"></i></div>
-                            </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-ship" style="color: #00bcd4;"></i></div>
+                            <span class="product-name">Leviathan Supreme</span>
+                            <div class="product-details">Le plus grand Yacht de l'Empire.</div>
+                            <div class="product-price price-stars">9,000 <i class="fas fa-star"></i> Stars</div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Imperial Falcon</span>
-                                <div class="item-price-display price-stars">3,500 <i class="fas fa-star"></i></div>
-                            </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car" style="color: #fc466b;"></i></div>
+                            <span class="product-name">Solaris GT-X</span>
+                            <div class="product-details">Vitesse maximale garantie.</div>
+                            <div class="product-price price-stars">4,800 <i class="fas fa-star"></i> Stars</div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Nebula Jet-X</span>
-                                <div class="item-price-display price-stars">5,000 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">StarWave 9000</span>
-                                <div class="item-price-display price-stars">6,200 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">HyperStream 77</span>
-                                <div class="item-price-display price-stars">7,000 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Orion Prestige</span>
-                                <div class="item-price-display price-stars">9,500 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Poseidon 44</span>
-                                <div class="item-price-display price-stars">1,600 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Titan Wave R</span>
-                                <div class="item-price-display price-stars">2,800 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Empire Yacht One</span>
-                                <div class="item-price-display price-stars">6,000 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Leviathan Supreme</span>
-                                <div class="item-price-display price-stars">9,000 <i class="fas fa-star"></i></div>
-                            </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-helicopter" style="color: #ffc107;"></i></div>
+                            <span class="product-name">DragonFly X</span>
+                            <div class="product-details">Hélicoptère VIP blindé.</div>
+                            <div class="product-price price-stars">3,800 <i class="fas fa-star"></i> Stars</div>
                             <button class="buy-button">Acheter</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="vehicle-section">
-                    <h5>💎 ÉLITE - Hypercars & Motos (Diamants)</h5>
-                    <div class="item-list">
-                         <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Nova Raptor</span>
-                                <div class="item-price-display price-stars">550 <i class="fas fa-star"></i></div>
-                            </div>
+                    <h5>ÉLITE - DIAMANTS</h5>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car-side" style="color: #00bcd4;"></i></div>
+                            <span class="product-name">Eclipse RR</span>
+                            <div class="product-details">Voiture de course, très haute performance.</div>
+                            <div class="product-price price-diamonds">3,500 <i class="fas fa-gem"></i> Diamants</div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Zenith GT-R</span>
-                                <div class="item-price-display price-stars">900 <i class="fas fa-star"></i></div>
-                            </div>
+                         <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-motorcycle" style="color: #ff4d4d;"></i></div>
+                            <span class="product-name">Phantom Bike</span>
+                            <div class="product-details">Moto furtive, idéale pour les missions.</div>
+                            <div class="product-price price-diamonds">2,300 <i class="fas fa-gem"></i> Diamants</div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Phantom V12</span>
-                                <div class="item-price-display price-stars">1,300 <i class="fas fa-star"></i></div>
-                            </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car-side" style="color: #8e2de2;"></i></div>
+                            <span class="product-name">Blaze 9000</span>
+                            <div class="product-details">Modèle sportif intermédiaire.</div>
+                            <div class="product-price price-diamonds">1,500 <i class="fas fa-gem"></i> Diamants</div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Emperor SX</span>
-                                <div class="item-price-display price-stars">2,400 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Shadow HyperSport</span>
-                                <div class="item-price-display price-stars">3,100 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Solaris GT-X</span>
-                                <div class="item-price-display price-stars">4,800 <i class="fas fa-star"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-
-                         <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Cobra Drift S</span>
-                                <div class="item-price-display price-diamonds">600 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Shadow Runner</span>
-                                <div class="item-price-display price-diamonds">950 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Blaze 9000</span>
-                                <div class="item-price-display price-diamonds">1,500 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Vortex Evo</span>
-                                <div class="item-price-display price-diamonds">2,100 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">NitroStorm</span>
-                                <div class="item-price-display price-diamonds">2,800 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Eclipse RR</span>
-                                <div class="item-price-display price-diamonds">3,500 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Rogue X</span>
-                                <div class="item-price-display price-diamonds">350 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">ThunderBlade</span>
-                                <div class="item-price-display price-diamonds">700 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Hellfire Moto</span>
-                                <div class="item-price-display price-diamonds">1,200 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">NightFury 99</span>
-                                <div class="item-price-display price-diamonds">1,700 <i class="fas fa-gem"></i></div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Phantom Bike</span>
-                                <div class="item-price-display price-diamonds">2,300 <i class="fas fa-gem"></i></div>
-                            </div>
+                         <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-motorcycle" style="color: #ffc107;"></i></div>
+                            <span class="product-name">ThunderBlade</span>
+                            <div class="product-details">Puissante et fiable.</div>
+                            <div class="product-price price-diamonds">700 <i class="fas fa-gem"></i> Diamants</div>
                             <button class="buy-button">Acheter</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="vehicle-section">
-                    <h5>🥇 PRESTIGE - Or</h5>
-                    <div class="item-list">
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">GoldRacer 11</span>
-                                <div class="item-price-display price-or">40 <i class="fas fa-medal"></i> Or</div>
+                    <h5>STANDARD - CASH & OR</h5>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car" style="color: #4CAF50;"></i></div>
+                            <span class="product-name">Panther S-Line</span>
+                            <div class="product-details">Voiture de ville améliorée.</div>
+                            <div class="product-price price-cash">110,000 <i class="fas fa-coins"></i> Cash</div>
+                            <button class="buy-button">Acheter</button>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-truck-pickup" style="color: #90a4ae;"></i></div>
+                            <span class="product-name">IronBeast X</span>
+                            <div class="product-details">SUV robuste, parfait pour tout terrain.</div>
+                            <div class="product-price">
+                                <span class="price-cash">150,000 <i class="fas fa-coins"></i></span>
+                                +
+                                <span class="price-or">40 <i class="fas fa-medal"></i></span>
                             </div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">NobleStar S</span>
-                                <div class="item-price-display price-or">75 <i class="fas fa-medal"></i> Or</div>
-                            </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-car" style="color: #a0aec0;"></i></div>
+                            <span class="product-name">Roadster 200</span>
+                            <div class="product-details">Véhicule de base pour débutant.</div>
+                            <div class="product-price price-cash">15,000 <i class="fas fa-coins"></i> Cash</div>
                             <button class="buy-button">Acheter</button>
                         </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">RoyalDrift LX</span>
-                                <div class="item-price-display price-or">120 <i class="fas fa-medal"></i> Or</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Emperor Classic</span>
-                                <div class="item-price-display price-or">180 <i class="fas fa-medal"></i> Or</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">SeaStar Mini</span>
-                                <div class="item-price-display price-or">90 <i class="fas fa-medal"></i> Or</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">WaveLux Pro</span>
-                                <div class="item-price-display price-or">150 <i class="fas fa-medal"></i> Or</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="vehicle-section">
-                    <h5>💵 STANDARD - Cash / Or</h5>
-                    <div class="item-list">
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Roadster 200</span>
-                                <div class="item-price-display price-cash">15,000 <i class="fas fa-coins"></i> Cash</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">TurboStreet</span>
-                                <div class="item-price-display price-cash">32,000 <i class="fas fa-coins"></i> Cash</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Falcon ZR</span>
-                                <div class="item-price-display price-cash">55,000 <i class="fas fa-coins"></i> Cash</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Titan Compact</span>
-                                <div class="item-price-display price-cash">75,000 <i class="fas fa-coins"></i> Cash</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Panther S-Line</span>
-                                <div class="item-price-display price-cash">110,000 <i class="fas fa-coins"></i> Cash</div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Mammoth 4x4</span>
-                                <div class="item-price-display">
-                                    <span class="price-cash">40,000 <i class="fas fa-coins"></i></span>
-                                    +
-                                    <span class="price-or">10 <i class="fas fa-medal"></i></span>
-                                </div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Empire SUV</span>
-                                <div class="item-price-display">
-                                    <span class="price-cash">90,000 <i class="fas fa-coins"></i></span>
-                                    +
-                                    <span class="price-or">25 <i class="fas fa-medal"></i></span>
-                                </div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">Desert King</span>
-                                <div class="item-price-display">
-                                    <span class="price-cash">120,000 <i class="fas fa-coins"></i></span>
-                                    +
-                                    <span class="price-or">35 <i class="fas fa-medal"></i></span>
-                                </div>
-                            </div>
-                            <button class="buy-button">Acheter</button>
-                        </div>
-                        <div class="list-item-card">
-                            <div class="item-details">
-                                <span class="item-name">IronBeast X</span>
-                                <div class="item-price-display">
-                                    <span class="price-cash">150,000 <i class="fas fa-coins"></i></span>
-                                    +
-                                    <span class="price-or">40 <i class="fas fa-medal"></i></span>
-                                </div>
-                            </div>
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas fa-life-ring" style="color: #FFD700;"></i></div>
+                            <span class="product-name">WaveLux Pro</span>
+                            <div class="product-details">Petit Yacht accessible en Or.</div>
+                            <div class="product-price price-or">150 <i class="fas fa-medal"></i> Or</div>
                             <button class="buy-button">Acheter</button>
                         </div>
                     </div>
@@ -839,8 +565,8 @@
 
             <div class="market-sub-view" id="sub-view-sell">
                 <div class="sub-view-header">
-                    <h4>🪙 Vendre des Actifs</h4>
-                    <p>Vente automatique instantanée de vos biens contre du Cash, des Diamants et de l'Or.</p>
+                    <h4>Vendre des Actifs</h4>
+                    <p>Vente automatique instantanée de vos biens.</p>
                 </div>
             </div>
             
